@@ -1,7 +1,7 @@
 import RecipeApi from '@/services/RecipeApi'
 
 export default {
-    fetchRecipes () {
+    getRecipes () {
       return RecipeApi().get('recipes')
     }
   }
