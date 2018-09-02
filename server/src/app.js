@@ -2,8 +2,9 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const morgan = require('morgan')
+const recipe = require('../models/recipe.js')
 
 app.use(morgan('combined'))
 app.use(bodyParser.json())
@@ -18,7 +19,6 @@ db.once("open", function(callback){
   console.log("Connection Succeeded");
 });
 
-
 app.get('/recipes', (req, res) => {
     res.send(
       [{
@@ -31,6 +31,26 @@ app.get('/recipes', (req, res) => {
         cookTime: 35
       }]
     )
+  })
+
+  app.post('/recipes', (req, res) => {
+    var db = req.db;
+    var recipeTitle = req.body.title;
+    var recipeDescription = req.body.description;
+    var new_recipe = new Recipe({
+      title: recipeTitle,
+      description: recipeDescription
+    })
+  
+    new_recipe.save(function (error) {
+      if (error) {
+        console.log("*****The following runtime error occured:" + error)
+      }
+      res.send({
+        success: true,
+        message: 'Post saved successfully!'
+      })
+    })
   })
 
 app.listen(process.env.PORT || 8081)
