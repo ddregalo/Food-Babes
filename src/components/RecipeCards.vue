@@ -1,13 +1,13 @@
 <template>
     <div>
-        <b-card title="Card Title"
-                img-src="https://picsum.photos/600/300/?image=25"
-                img-alt="Default Recipe Food Image"
-                img-top
-                tag="article"
-                style="max-width: 20rem;"
-                class="recipe-card">
-            <div v-for="recipe in recipes" :key="recipe._id">
+        <div v-for="recipe in recipes" :key="recipe._id">
+            <b-card title="Card Title"
+            img-src="https://picsum.photos/600/300/?image=25"
+            img-alt="Default Recipe Food Image"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="recipe-card">
                 <p>
                     <span><b>{{ recipe.title }}</b></span><br/>
                     <span>{{ recipe.description }}</span><br/>
@@ -20,9 +20,9 @@
                     <span>{{ recipe && recipe.ingredients && recipe.ingredients.quantity }}</span><br/>
                     <span>{{ recipe.method }}</span>
                 </p>
-            </div>
-            <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
-        </b-card>
+                <b-button href="#" variant="primary">Go somewhere</b-button>
+            </b-card>
+        </div>
     </div>
 </template>
 <script lang="ts">
