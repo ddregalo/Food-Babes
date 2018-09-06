@@ -1,12 +1,14 @@
 <template>
-    <div class="recipes">
+    <div>
         <div class="title">
-            <h1>recipes </h1>
+            <h1>recipes</h1>
             <div class="new-recipe-link">
                 <router-link to="/recipes/new">New Recipe</router-link>
             </div>
         </div>
-        <RecipeCards></RecipeCards>
+        <div>
+            <RecipeCards></RecipeCards>
+        </div>
     </div>
 </template>
 
