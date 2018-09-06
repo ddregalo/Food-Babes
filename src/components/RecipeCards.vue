@@ -1,28 +1,29 @@
 <template>
     <div>
-        <div v-for="recipe in recipes" :key="recipe._id">
-            <b-card title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Default Recipe Food Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="recipe-card">
-                <p>
-                    <span><b>{{ recipe.title }}</b></span><br/>
-                    <span>{{ recipe.description }}</span><br/>
-                    <span>{{ recipe.meal }}</span><br/>
-                    <span>{{ recipe.cuisine }}</span><br/>
-                    <span>{{ recipe.totalTime }}</span><br/>
-                    <span>{{ recipe.prepTime }}</span><br/>
-                    <span>{{ recipe.cookTime }}</span><br/>
-                    <span>{{ recipe && recipe.ingredients && recipe.ingredients.item }}</span><br/>
-                    <span>{{ recipe && recipe.ingredients && recipe.ingredients.quantity }}</span><br/>
-                    <span>{{ recipe.method }}</span>
-                </p>
-                <b-button href="#" variant="primary">Go somewhere</b-button>
-            </b-card>
-        </div>
+        <b-card-group deck class="align-items-center d-flex justify-content-center">
+            <div v-for="recipe in recipes" :key="recipe._id" class="card-group">
+                <b-card :title="recipe.title"
+                img-src="https://picsum.photos/600/300/?image=25"
+                img-alt="Default Recipe Food Image"
+                img-top
+                tag="article"
+                style="max-width: 20rem;"
+                class="recipe-card">
+                    <p>
+                        <span>{{ recipe.description }}</span><br/>
+                        <span>{{ recipe.meal }}</span><br/>
+                        <span>{{ recipe.cuisine }}</span><br/>
+                        <span>{{ recipe.totalTime }}</span><br/>
+                        <span>{{ recipe.prepTime }}</span><br/>
+                        <span>{{ recipe.cookTime }}</span><br/>
+                        <span>{{ recipe && recipe.ingredients && recipe.ingredients.item }}</span><br/>
+                        <span>{{ recipe && recipe.ingredients && recipe.ingredients.quantity }}</span><br/>
+                        <span>{{ recipe.method }}</span>
+                    </p>
+                    <b-button href="#" variant="primary">Go somewhere</b-button>
+                </b-card>
+            </div>
+        </b-card-group>
     </div>
 </template>
 <script lang="ts">
@@ -58,5 +59,9 @@
 <style scoped lang="scss">
 p {
     color: black;
+}
+
+.recipe-card {
+    margin: 15px;
 }
 </style>
