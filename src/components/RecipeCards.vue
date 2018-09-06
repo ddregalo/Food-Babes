@@ -20,7 +20,7 @@
                         <span>{{ recipe && recipe.ingredients && recipe.ingredients.quantity }}</span><br/>
                         <span>{{ recipe.method }}</span>
                     </p>
-                    <b-button href="#" variant="primary">Go somewhere</b-button>
+                    <!-- <router-link to="/recipe/:id"><b-button variant="primary">SELECT</b-button></router-link> -->
                 </b-card>
             </div>
         </b-card-group>
@@ -60,7 +60,6 @@
 p {
     color: black;
 }
-
 .recipe-card {
     margin: 15px;
 }
