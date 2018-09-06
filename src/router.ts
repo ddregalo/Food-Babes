@@ -33,6 +33,12 @@ export default new Router({
       name: 'NewRecipe',
       component: () =>
         import(/* webpackChunkName: "newrecipe" */ "./components/NewRecipe.vue")
+    },
+    {
+      path: '/recipes/edit/:id',
+      name: 'EditRecipe',
+      component: () =>
+        import(/* webpackChunkName: "editRecipe" */ "./components/EditRecipe.vue")
     }
   ]
 });
