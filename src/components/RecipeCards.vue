@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-card-group deck class="align-items-center d-flex justify-content-center">
-            <div v-for="recipe in recipes" :key="recipe._id" class="card-group">
+            <div v-for="(recipe, index) in recipes" :key="recipe._id" class="card-group">
                 <b-card :title="recipe.title"
                 img-src="https://picsum.photos/600/300/?image=25"
                 img-alt="Default Recipe Food Image"
@@ -21,6 +21,8 @@
                         <span>{{ recipe.method }}</span>
                     </p>
                     <!-- <router-link to="/recipe/:id"><b-button variant="primary">SELECT</b-button></router-link> -->
+                    <router-link v-bind:to="{ name: 'EditRecipe', params: { id: recipe._id } }">Edit</router-link> |
+                    <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
                 </b-card>
             </div>
         </b-card-group>
@@ -48,6 +50,11 @@
                 {
                     alert("Error Message Log: " + err)
                 }   
+            },
+            async deleteRecipe (id: any, index: number) {
+                await RecipeService.deleteRecipe(id);
+                this.recipes.splice(index, 1);
+                this.$router.push({ name: 'recipes' });
             }
         },
 
