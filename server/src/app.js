@@ -21,12 +21,24 @@ db.once("open", function(callback){
 
 app.get('/recipes', (req, res) => {
   Recipe.find({}, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipes) {
-    if (error) { console.error("Runtime error occured: " + error); }
+    if (error) {
+      throw new Error("An error occured getting all recipes: " + error);
+    };
     res.send({
       recipes: recipes
-    })
+    });
   }).sort({_id:-1})
 })
+
+app.get('/recipes/:id', (req, res) => {
+  var db = req.db;
+  Recipe.findById(req.params.id, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
+    if (error) {
+      throw new Error("An error occured locating the recipe // Error Msg:  " + error);
+    };
+    res.send(recipe);
+  })
+});
 
 app.post('/recipes', (req, res) => {
   var db = req.db;
@@ -55,23 +67,26 @@ app.post('/recipes', (req, res) => {
             quantity: recipeIngredientQuantity
         },
     method: recipeMethod
-  })
+  });
 
   new_recipe.save(function (error) {
     if (error) {
-      console.log("*****The following runtime error occured:" + error)
+      throw new Error("An error occured trying to save the recipe // Error Msg: :" + error);
     }
     res.send({
       success: true,
       message: 'Post saved successfully!'
-    })
-  })
-})
+    });
+  });
+});
 
-app.put('/recipes/edit/:id', (req, res) => {
+app.put('/recipes/:id', (req, res) => {
   var db = req.db;
-  Recipe.findById(req.params.id, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
-    if (error) { console.error(error); }
+
+  Recipe.findById(req.body.id, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
+    if (error) { 
+      throw new Error("An error occured locating the recipe to update // Error Msg: " + error);
+    }
 
     recipe.title = req.body.title;
     recipe.description = req.body.description;
@@ -84,13 +99,26 @@ app.put('/recipes/edit/:id', (req, res) => {
     recipe.ingredients.quantity = req.body.ingredients.quantity;
     recipe.method = req.body.method;
 
-    post.save(function (error) {
+    recipe.save(function (error) {
       if (error) {
-        alert("RunTime Error //   " + error);
+        throw new Error("Error saving updated recipe //   " + error);
       }
       res.send({
         success: true
-      })
+      });
+    });
+  });
+})
+
+app.delete('/recipes/:id', (req, res) => {
+  var db = req.db;
+  Recipe.remove({
+    _id: req.params.id
+  }, function(err, post){
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
     })
   })
 })
