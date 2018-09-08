@@ -4,10 +4,13 @@
       <div class="form">
         <h4 class="form-subtitle">GENERAL DETAILS</h4>
         <div>
+          <input type="text" name="url" :placeholder="url" v-model="url">
+        </div>
+        <div>
           <input type="text" name="title" :placeholder="title" v-model="title">
         </div>
         <div>
-          <textarea rows="15" cols="15" placeholder="DESCRIPTION..." v-model="description"></textarea>
+          <textarea rows="15" cols="15" :placeholder="description" v-model="description"></textarea>
         </div>
         <div>
             <p class="dropdown-text">Select the type of meal from the list:</p>
@@ -37,23 +40,23 @@
         </div>
         <h4 class="form-subtitle">TIMING</h4>
         <div>
-          <input type="number" name="totalTime" placeholder="TOTAL TIME FROM START TO TABLE IN MINUTES..." v-model="totalTime">
+          <input type="number" name="totalTime" :placeholder="totalTime" v-model="totalTime">
         </div>
         <div>
-          <input type="number" name="prepTime" placeholder="TIME IT TAKES TO PREP THE MEAL IN MINUTES..." v-model="prepTime">
+          <input type="number" name="prepTime" :placeholder="prepTime" v-model="prepTime">
         </div>
         <div>
-          <input type="number" name="cookTime" placeholder="TIME IT TAKES TO COOK THE MEAL IN MINUTES..." v-model="cookTime">
+          <input type="number" name="cookTime" :placeholder="cookTime" v-model="cookTime">
         </div>
         <h4 class="form-subtitle">INGREDIENTS</h4>
         <div>
-          <input type="text" name="item" placeholder="INGREDIENT" v-model="ingredients.item">
-          <input type="number" name="quantity" placeholder="QUANTITY" v-model="ingredients.quantity">
+          <input type="text" name="item" :placeholder="ingredients.item" v-model="ingredients.item">
+          <input type="number" name="quantity" :placeholder="ingredients.quantity" v-model="ingredients.quantity">
         </div>
 
         <h4 class="form-subtitle">METHOD</h4>
         <div>
-          <input type="text" name="method" placeholder="ENTER RECIPE INSTRUCTIONS..." v-model="method">
+          <input type="text" name="method" :placeholder="method" v-model="method">
         </div>
         <div>
           <button class="app_post_btn" @click="updateRecipe">Update</button>
@@ -68,6 +71,7 @@
     name: 'EditRecipe',
     data () {
         return {
+            url: '',
             title: '',
             description: '',
             meal: '',
@@ -86,6 +90,7 @@
     methods: {
         async getRecipe () {            const response = await RecipeService.getRecipe({id: this.$route.params.id})
                 .then(response => {
+                    this.url = response.data.url;
                     this.title = response.data.title;
                     this.description = response.data.description;
                     this.meal = response.data.meal;
@@ -105,6 +110,7 @@
         async updateRecipe () {
             await RecipeService.updateRecipe({
                 id: this.$route.params.id,
+                url: this.url,
                 title: this.title,
                 description: this.description,
                 meal: this.meal,

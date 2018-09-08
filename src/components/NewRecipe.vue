@@ -4,6 +4,9 @@
       <div class="form">
         <h4 class="form-subtitle">GENERAL DETAILS</h4>
         <div>
+          <input type="text" name="title" placeholder="LINK TO RECIPE..." v-model="url">
+        </div>
+        <div>
           <input type="text" name="title" placeholder="TITLE..." v-model="title">
         </div>
         <div>
@@ -68,17 +71,18 @@ export default {
   name: 'NewRecipe',
   data () {
     return {
+        url: '',
         title: '',
         description: '',
         meal: '',
         cuisine: '',
-        totalTime: 0,
-        prepTime: 0,
-        cookTime: 0,
+        totalTime: '',
+        prepTime: '',
+        cookTime: '',
         ingredients:
         {
             item: '',
-            quantity: 0
+            quantity: ''
         },
         method: ''
     }
@@ -86,6 +90,7 @@ export default {
   methods: {
     async addRecipe () {
       await RecipeService.addRecipe({
+        url: this.url,
         title: this.title,
         description: this.description,
         meal: this.meal,

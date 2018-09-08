@@ -20,7 +20,7 @@ db.once("open", function(callback){
 });
 
 app.get('/recipes', (req, res) => {
-  Recipe.find({}, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipes) {
+  Recipe.find({}, 'url title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipes) {
     if (error) {
       throw new Error("An error occured getting all recipes: " + error);
     };
@@ -32,7 +32,7 @@ app.get('/recipes', (req, res) => {
 
 app.get('/recipes/:id', (req, res) => {
   var db = req.db;
-  Recipe.findById(req.params.id, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
+  Recipe.findById(req.params.id, 'url title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
     if (error) {
       throw new Error("An error occured locating the recipe // Error Msg:  " + error);
     };
@@ -42,6 +42,7 @@ app.get('/recipes/:id', (req, res) => {
 
 app.post('/recipes', (req, res) => {
   var db = req.db;
+  var recipeUrl = req.body.url;
   var recipeTitle = req.body.title;
   var recipeDescription = req.body.description;   
   var recipeMeal = req.body.meal;
@@ -54,6 +55,7 @@ app.post('/recipes', (req, res) => {
   var recipeMethod = req.body.method;
 
   var new_recipe = new Recipe({
+    url: recipeUrl,
     title: recipeTitle,
     description: recipeDescription,
     meal: recipeMeal,
@@ -83,11 +85,11 @@ app.post('/recipes', (req, res) => {
 app.put('/recipes/:id', (req, res) => {
   var db = req.db;
 
-  Recipe.findById(req.body.id, 'title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
+  Recipe.findById(req.body.id, 'url title description meal cuisine totalTime prepTime cookTime ingredients.item ingredients.quantity method', function (error, recipe) {
     if (error) { 
       throw new Error("An error occured locating the recipe to update // Error Msg: " + error);
     }
-
+    recipe.url = req.body.url;
     recipe.title = req.body.title;
     recipe.description = req.body.description;
     recipe.meal = req.body.meal;
