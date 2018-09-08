@@ -10,7 +10,7 @@
                 style="max-width: 20rem;"
                 class="recipe-card">
                     <p>
-                        <a :href="recipe.url">{{ recipe.url }}</a><br/>
+                        <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
                         <span>{{ recipe.description }}</span><br/>
                         <span>{{ recipe.meal }}</span><br/>
                         <span>{{ recipe.cuisine }}</span><br/>
