@@ -10,7 +10,7 @@
                 style="max-width: 20rem;"
                 class="recipe-card">
                     <p>
-                        <span>{{ recipe.url }}</span><br/>
+                        <a :href="recipe.url">{{ recipe.url }}</a><br/>
                         <span>{{ recipe.description }}</span><br/>
                         <span>{{ recipe.meal }}</span><br/>
                         <span>{{ recipe.cuisine }}</span><br/>
