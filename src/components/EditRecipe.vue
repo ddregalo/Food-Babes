@@ -1,6 +1,6 @@
 <template>
   <div class="new-recipe">
-    <h1>Edit {{title}}</h1>
+    <h1>Edit Recipe</h1>
       <div class="form">
         <h4 class="form-subtitle">GENERAL DETAILS</h4>
         <div>
@@ -130,6 +130,14 @@
 </script>
 
 <style type="text/css">
+h1 {
+    font-size: 5em;
+    color: #4d7ef7;
+    margin-top: 0;
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
 .form input, .form textarea {
   width: 500px;
   padding: 10px;
