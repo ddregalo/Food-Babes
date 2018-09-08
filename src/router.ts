@@ -29,14 +29,15 @@ export default new Router({
         import(/* webpackChunkName: "recipes" */ "./views/Recipes.vue")
     },
     {
-      path: '/recipes/new',
-      name: 'NewRecipe',
+      path: "/recipes/new",
+      name: "NewRecipe",
       component: () =>
         import(/* webpackChunkName: "newrecipe" */ "./components/NewRecipe.vue")
     },
     {
-      path: '/recipes/edit/:id',
-      name: 'EditRecipe',
+      path: "/recipes/:id",
+      name: "EditRecipe",
+      // component: EditRecipe
       component: () =>
         import(/* webpackChunkName: "editRecipe" */ "./components/EditRecipe.vue")
     }
