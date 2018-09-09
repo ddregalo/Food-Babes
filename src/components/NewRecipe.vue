@@ -49,11 +49,15 @@
           <input type="number" name="cookTime" placeholder="TIME IT TAKES TO COOK THE MEAL IN MINUTES..." v-model="cookTime">
         </div>
         <h4 class="form-subtitle">INGREDIENTS</h4>
+        <span v-for="ingredientRow in ingredientRows" :key="ingredientRow.id">
+          <div>
+            <input type="text" name="item" placeholder="INGREDIENT" v-model="ingredients.item">
+            <input type="number" name="quantity" placeholder="QUANTITY" v-model="ingredients.quantity">
+          </div>
+        </span>
         <div>
-          <input type="text" name="item" placeholder="INGREDIENT" v-model="ingredients.item">
-          <input type="number" name="quantity" placeholder="QUANTITY" v-model="ingredients.quantity">
+          <b-button class="button btn-primary" @click="addIngredient">Add Ingredient</b-button>
         </div>
-
         <h4 class="form-subtitle">METHOD</h4>
         <div>
           <input type="text" name="method" placeholder="ENTER RECIPE INSTRUCTIONS..." v-model="method">
@@ -71,6 +75,7 @@ export default {
   name: 'NewRecipe',
   data () {
     return {
+        ingredientRows: [],
         url: '',
         title: '',
         description: '',
@@ -88,7 +93,14 @@ export default {
     }
   },
   methods: {
-    async addRecipe () {
+    addIngredient: function() {
+      document.createElement('span');
+      this.ingredientRows.push({
+          item: "",
+          quantity: ""
+      });
+    },
+    async addRecipe() {
       await RecipeService.addRecipe({
         url: this.url,
         title: this.title,
