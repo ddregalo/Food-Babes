@@ -88,7 +88,8 @@
         }
     },
     methods: {
-        async getRecipe () {            const response = await RecipeService.getRecipe({id: this.$route.params.id})
+        async getRecipe () {
+            const response = await RecipeService.getRecipe({id: this.$route.params.id})
                 .then(response => {
                     this.url = response.data.url;
                     this.title = response.data.title;
