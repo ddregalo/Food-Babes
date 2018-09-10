@@ -99,8 +99,8 @@
                     this.totalTime = response.data.totalTime;
                     this.prepTime = response.data.prepTime;
                     this.cookTime = response.data.cookTime;
-                    this.ingredients.item = response.data.ingredients.item
-                    this.ingredients.quantity = response.data.ingredients.quantity
+                    this.ingredients.item = response.data.ingredients.item;
+                    this.ingredients.quantity = response.data.ingredients.quantity;
                     this.method = response.data.method;
                 })
                 .catch(function (error) {
