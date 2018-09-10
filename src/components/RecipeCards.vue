@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <b-card-group deck class="align-items-center d-flex justify-content-center">
+    <div class="">
+        <b-card-group deck class="align-items-top d-flex justify-content-center">
             <div v-for="(recipe, index) in recipes" :key="recipe._id" class="card-group">
                 <b-card :title="recipe.title"
                 img-src="https://picsum.photos/600/300/?image=25"
@@ -67,6 +67,9 @@
 <style scoped lang="scss">
 p {
     color: black;
+}
+.align-top {
+    vertical-align: top;
 }
 .recipe-card {
     margin: 15px;
