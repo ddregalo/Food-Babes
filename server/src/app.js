@@ -50,8 +50,7 @@ app.post('/recipes', (req, res) => {
   var recipeTotalTime = req.body.totalTime;
   var recipePrepTime = req.body.prepTime;
   var recipeCookTime = req.body.cookTime;
-  var recipeIngredientItem = req.body.ingredients.item;
-  var recipeIngredientQuantity = req.body.ingredients.quantity;
+  var recipeIngredients = req.body.ingredients;
   var recipeMethod = req.body.method;
 
   var new_recipe = new Recipe({
@@ -63,11 +62,7 @@ app.post('/recipes', (req, res) => {
     totalTime:recipeTotalTime,
     prepTime: recipePrepTime,
     cookTime: recipeCookTime,
-    ingredients:
-        {
-            item: recipeIngredientItem,
-            quantity: recipeIngredientQuantity
-        },
+    ingredients: recipeIngredients,
     method: recipeMethod
   });
 
