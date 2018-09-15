@@ -11,10 +11,12 @@ var RecipeSchema = new Schema({
     prepTime: Number,
     cookTime: Number,
     ingredients:
+    [
         {
-            item: String,
-            quantity: Number
-        },
+        item: String,
+        quantity: Number
+        }
+    ],
     method: String
 });
 
