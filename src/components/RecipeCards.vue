@@ -11,24 +11,13 @@
                 class="recipe-card">
                     <p>
                         <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
-                        <span>{{ recipe.description }}</span><br/>
                         <span>{{ recipe.meal }}</span><br/>
                         <span>{{ recipe.cuisine }}</span><br/>
                         <span>{{ recipe.totalTime }}</span><br/>
-                        <span>{{ recipe.prepTime }}</span><br/>
-                        <span>{{ recipe.cookTime }}</span><br/>
-                        <span style="display: inline;" v-for="(ingredient, index) in ingredients" :key="index">
-                            <span v-for="(element, index) in ingredient" :key="index">
-                                 <span class="mr-3">{{ element.item }}</span>
-                                 <span>{{ element.quantity }}</span><br>
-                            </span>
-                        </span>
-                        <span>{{ recipe.method }}</span>
                     </p>
                     <div class="mb-3">
                         <b-btn><router-link v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">SELECT</router-link></b-btn>
                     </div>
-                    <!-- <router-link to="/recipe/:id"><b-button variant="primary">SELECT</b-button></router-link> -->
                     <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
                     <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
                 </b-card>
