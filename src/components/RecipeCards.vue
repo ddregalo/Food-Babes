@@ -25,6 +25,9 @@
                         </span>
                         <span>{{ recipe.method }}</span>
                     </p>
+                    <div class="mb-3">
+                        <b-btn><router-link v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">SELECT</router-link></b-btn>
+                    </div>
                     <!-- <router-link to="/recipe/:id"><b-button variant="primary">SELECT</b-button></router-link> -->
                     <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
                     <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>

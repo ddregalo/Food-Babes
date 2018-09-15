@@ -36,6 +36,13 @@ export default new Router({
     },
     {
       path: "/recipes/:id",
+      name: "Recipe",
+      // component: Recipe
+      component: () =>
+        import(/* webpackChunkName: "recipe" */ "./components/Recipe.vue")
+    },
+    {
+      path: "/recipes/:id",
       name: "UpdateRecipe",
       // component: UpdateRecipe
       component: () =>
