@@ -19,8 +19,8 @@
                         <span>{{ recipe.cookTime }}</span><br/>
                         <span style="display: inline;" v-for="(ingredient, index) in ingredients" :key="index">
                             <span v-for="(element, index) in ingredient" :key="index">
-                                 <span>{{ element.item }}</span><br/>
-                                 <span>{{ element.quantity }}</span><br/>
+                                 <span class="mr-3">{{ element.item }}</span>
+                                 <span>{{ element.quantity }}</span><br>
                             </span>
                         </span>
                         <span>{{ recipe.method }}</span>
