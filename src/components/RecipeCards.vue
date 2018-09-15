@@ -16,7 +16,7 @@
                         <span>{{ recipe.totalTime }}</span><br/>
                     </p>
                     <div class="mb-3">
-                        <b-btn><router-link v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">SELECT</router-link></b-btn>
+                        <b-button variant="primary"><router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">SELECT</router-link></b-button>
                     </div>
                     <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
                     <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
@@ -75,5 +75,9 @@ p {
 }
 .recipe-card {
     margin: 15px;
+    text-transform: capitalize;
+}
+#view-recipe-button {
+    color: white
 }
 </style>
