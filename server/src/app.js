@@ -92,8 +92,7 @@ app.put('/recipes/:id', (req, res) => {
     recipe.totalTime = req.body.totalTime;
     recipe.prepTime = req.body.prepTime;
     recipe.cookTime = req.body.cookTime;
-    recipe.ingredients.item = req.body.ingredients.item;
-    recipe.ingredients.quantity = req.body.ingredients.quantity;
+    recipe.ingredients = req.body.ingredients;
     recipe.method = req.body.method;
 
     recipe.save(function (error) {
