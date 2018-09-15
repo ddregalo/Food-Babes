@@ -36,10 +36,10 @@ export default new Router({
     },
     {
       path: "/recipes/:id",
-      name: "EditRecipe",
-      // component: EditRecipe
+      name: "UpdateRecipe",
+      // component: UpdateRecipe
       component: () =>
-        import(/* webpackChunkName: "editRecipe" */ "./components/EditRecipe.vue")
+        import(/* webpackChunkName: "updateRecipe" */ "./components/UpdateRecipe.vue")
     }
   ]
 });
