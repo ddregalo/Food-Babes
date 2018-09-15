@@ -4,7 +4,7 @@
         <b-form-group inline id="recipe-form-group-1" label="URL" label-for="url">
             <b-form-input id="url" type="text" v-model="recipe.url" placeholder="RECIPE URL"></b-form-input>
         </b-form-group>
-        <b-form-group id="recipe-form-group-10" label="URL" label-for="imageUrl">
+        <b-form-group id="recipe-form-group-10" label="IMAGE URL" label-for="imageUrl">
             <b-form-input id="imageUrl" class="form-input" type="text" v-model="recipe.imageUrl" placeholder="RECIPE IMGAGE URL">{{recipe.imageUrl}}</b-form-input>
         </b-form-group>
         <b-form-group inline id="recipe-form-group-2" label="TITLE" label-for="title">
