@@ -3,11 +3,11 @@
         <b-card-group deck class="align-items-top d-flex justify-content-center">
             <div class="card-group">
                 <b-card :title="recipe.title"
-                img-src="https://picsum.photos/600/300/?image=25"
+                :img-src="recipe.imageUrl"
                 img-alt="Default Recipe Food Image"
                 img-top
                 tag="article"
-                style="max-width: 20rem;"
+                style="max-width: 30rem;"
                 class="recipe-card">
                     <p>
                         <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
@@ -40,18 +40,18 @@
         data() {
             return {
                 recipe: {
-                    url: '',
-                    title: '',
-                    description: '',
-                    meal: '',
-                    cuisine: '',
-                    totalTime: '',
-                    prepTime: '',
-                    cookTime: '',
+                    url: "",
+                    imageUrl: "",
+                    title: "",
+                    description: "",
+                    meal: "",
+                    cuisine: "",
+                    totalTime: "",
+                    prepTime: "",
+                    cookTime: "",
                     ingredients: [],
-                    method: ''
+                    method: ""
                 }
-                // ingredients: [] as any[]
             }
         },
         methods: {
@@ -59,6 +59,7 @@
                 const response = await RecipeService.getRecipe({id: this.$route.params.id})
                     .then(response => {
                         this.recipe.url = response.data.url;
+                        this.recipe.imageUrl = response.data.imageUrl;
                         this.recipe.title = response.data.title;
                         this.recipe.description = response.data.description;
                         this.recipe.meal = response.data.meal;

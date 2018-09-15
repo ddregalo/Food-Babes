@@ -3,11 +3,11 @@
         <b-card-group deck class="align-items-top d-flex justify-content-center">
             <div v-for="(recipe, index) in recipes" :key="recipe._id" class="card-group">
                 <b-card :title="recipe.title"
-                img-src="https://picsum.photos/600/300/?image=25"
-                img-alt="Default Recipe Food Image"
+                :img-src="recipe.imageUrl"
+                img-alt="Recipe Food Image"
                 img-top
                 tag="article"
-                style="max-width: 20rem;"
+                style="max-width: 14rem;"
                 class="recipe-card">
                     <p>
                         <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
@@ -69,6 +69,7 @@
 <style scoped lang="scss">
 p {
     color: black;
+    font-size: 0.9em;
 }
 .align-top {
     vertical-align: top;
@@ -76,6 +77,7 @@ p {
 .recipe-card {
     margin: 15px;
     text-transform: capitalize;
+    font-size: 1em;
 }
 #view-recipe-button {
     color: white

@@ -4,6 +4,9 @@
         <b-form-group id="recipe-form-group-1" label="URL" label-for="url">
             <b-form-input id="url" class="form-input" type="text" v-model="recipe.url" placeholder="RECIPE LINK URL">{{recipe.url}}</b-form-input>
         </b-form-group>
+        <b-form-group id="recipe-form-group-10" label="IMAGE URL" label-for="imageUrl">
+            <b-form-input id="imageUrl" class="form-input" type="text" v-model="recipe.imageUrl" placeholder="RECIPE IMGAGE URL">{{recipe.imageUrl}}</b-form-input>
+        </b-form-group>
         <b-form-group inline id="recipe-form-group-2" label="TITLE" label-for="title">
             <b-form-input id="title" class="form-input" type="text" v-model="recipe.title" placeholder="TITLE">{{recipe.title}}</b-form-input>
         </b-form-group>
@@ -66,6 +69,7 @@ export default Vue.extend({
         return {
             recipe: {
                 url: '',
+                imageUrl: "",
                 title: '',
                 description: '',
                 meal: '',
@@ -91,6 +95,7 @@ export default Vue.extend({
             const response = await RecipeService.getRecipe({id: this.$route.params.id})
                 .then(response => {
                     this.recipe.url = response.data.url;
+                    this.recipe.imageUrl = response.data.imageUrl;
                     this.recipe.title = response.data.title;
                     this.recipe.description = response.data.description;
                     this.recipe.meal = response.data.meal;
@@ -119,6 +124,7 @@ export default Vue.extend({
             await RecipeService.updateRecipe({
                 id: this.$route.params.id,
                 url: this.recipe.url,
+                imageUrl: this.recipe.imageUrl,
                 title: this.recipe.title,
                 description: this.recipe.description,
                 meal: this.recipe.meal,

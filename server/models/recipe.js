@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var RecipeSchema = new Schema({
     url: String,
+    imageUrl: String,
     title: String,
     description: String,
     meal: String,

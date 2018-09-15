@@ -4,6 +4,9 @@
         <b-form-group inline id="recipe-form-group-1" label="URL" label-for="url">
             <b-form-input id="url" type="text" v-model="recipe.url" placeholder="RECIPE URL"></b-form-input>
         </b-form-group>
+        <b-form-group id="recipe-form-group-10" label="URL" label-for="imageUrl">
+            <b-form-input id="imageUrl" class="form-input" type="text" v-model="recipe.imageUrl" placeholder="RECIPE IMGAGE URL">{{recipe.imageUrl}}</b-form-input>
+        </b-form-group>
         <b-form-group inline id="recipe-form-group-2" label="TITLE" label-for="title">
             <b-form-input id="title" type="text" v-model="recipe.title" placeholder="RECIPE URL"></b-form-input>
         </b-form-group>
@@ -65,16 +68,17 @@ export default Vue.extend({
   data () {
     return {
       recipe: {
-        url: '',
-        title: '',
-        description: '',
-        meal: '',
-        cuisine: '',
-        totalTime: '',
-        prepTime: '',
-        cookTime: '',
+        url: "",
+        imageUrl: "",
+        title: "",
+        description: "",
+        meal: "",
+        cuisine: "",
+        totalTime: "",
+        prepTime: "",
+        cookTime: "",
         ingredients: [],
-        method: ''
+        method: ""
       },
       meals: [
         { text: 'Select One', value: null },
@@ -100,6 +104,7 @@ export default Vue.extend({
         evt.preventDefault();
         await RecipeService.addRecipe({
             url: this.recipe.url,
+            imageUrl: this.recipe.imageUrl,
             title: this.recipe.title,
             description: this.recipe.description,
             meal: this.recipe.meal,
