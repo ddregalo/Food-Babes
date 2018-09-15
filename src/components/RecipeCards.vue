@@ -17,8 +17,12 @@
                         <span>{{ recipe.totalTime }}</span><br/>
                         <span>{{ recipe.prepTime }}</span><br/>
                         <span>{{ recipe.cookTime }}</span><br/>
-                        <span>{{ recipe && recipe.ingredients && recipe.ingredients.item }}</span><br/>
-                        <span>{{ recipe && recipe.ingredients && recipe.ingredients.quantity }}</span><br/>
+                        <span style="display: inline;" v-for="(ingredient, index) in ingredients" :key="index">
+                            <span v-for="(element, index) in ingredient" :key="index">
+                                 <span>{{ element.item }}</span><br/>
+                                 <span>{{ element.quantity }}</span><br/>
+                            </span>
+                        </span>
                         <span>{{ recipe.method }}</span>
                     </p>
                     <!-- <router-link to="/recipe/:id"><b-button variant="primary">SELECT</b-button></router-link> -->
@@ -38,14 +42,20 @@
         props: [],
         data() {
             return {
-                recipes: [],
+                recipes: [] as any[],
+                ingredients: [] as any[]
             }
         },
         methods: {
             async getAllRecipes () {
+                var self = this;
                 try {
                     const response = await RecipeService.getRecipes();
-                    return this.recipes = response.data.recipes;
+                    var allRecipes = await response.data.recipes;
+                    await allRecipes.forEach(function(recipe: any) {
+                        self.ingredients.push(recipe.ingredients);
+                    });
+                    return this.recipes = allRecipes;
                 }
                 catch (err)
                 {
