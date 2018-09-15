@@ -8,7 +8,7 @@
             <b-form-input id="title" type="text" v-model="recipe.title" placeholder="RECIPE URL"></b-form-input>
         </b-form-group>
         <b-form-group inline id="recipe-form-group-3" label="DESCRIPTION" label-for="title">
-            <b-form-text id="description" type="text" v-model="recipe.description" placeholder="A SHORT DESCRIPTION OF THE RECIPE..."></b-form-text>
+            <b-form-textarea id="description" type="text" v-model="recipe.description" placeholder="A SHORT DESCRIPTION OF THE RECIPE..."></b-form-textarea>
         </b-form-group>
         <b-form-group inline id="recipe-form-group-4" label="MEAL" label-for="meal">
             <b-form-select id="meal" :options="meals" required v-model="recipe.meal"></b-form-select>
