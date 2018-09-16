@@ -64,101 +64,116 @@ import Vue from "vue";
 import RecipeService from "@/services/RecipeService";
 
 export default Vue.extend({
-    name: 'UpdateRecipeForm',
-    data () {
-        return {
-            recipe: {
-                url: '',
-                imageUrl: "",
-                title: '',
-                description: '',
-                meal: '',
-                cuisine: '',
-                totalTime: '',
-                prepTime: '',
-                cookTime: '',
-                ingredients: [],
-                method: ''
-            },
-            meals: [
-                { text: 'Select One', value: null },
-                "Breakfast", "Lunch", "Snack", "Dinner", "Desert"
-            ],
-            cuisines: [
-                { text: 'Select One', value: null },
-                "American", "Asian", "British", "Chinese", "Desert", "French", "Indian", "Italian", "Mexican", "Middle-Eastern", "Other" 
-            ]
-        }
+  name: "UpdateRecipeForm",
+  data() {
+    return {
+      recipe: {
+        url: "",
+        imageUrl: "",
+        title: "",
+        description: "",
+        meal: "",
+        cuisine: "",
+        totalTime: "",
+        prepTime: "",
+        cookTime: "",
+        ingredients: [],
+        method: ""
+      },
+      meals: [
+        { text: "Select One", value: null },
+        "Breakfast",
+        "Lunch",
+        "Snack",
+        "Dinner",
+        "Desert"
+      ],
+      cuisines: [
+        { text: "Select One", value: null },
+        "American",
+        "Asian",
+        "British",
+        "Chinese",
+        "Desert",
+        "French",
+        "Indian",
+        "Italian",
+        "Mexican",
+        "Middle-Eastern",
+        "Other"
+      ]
+    };
+  },
+  methods: {
+    async getRecipe() {
+      const response = await RecipeService.getRecipe({
+        id: this.$route.params.id
+      })
+        .then(response => {
+          this.recipe.url = response.data.url;
+          this.recipe.imageUrl = response.data.imageUrl;
+          this.recipe.title = response.data.title;
+          this.recipe.description = response.data.description;
+          this.recipe.meal = response.data.meal;
+          this.recipe.cuisine = response.data.cuisine;
+          this.recipe.totalTime = response.data.totalTime;
+          this.recipe.prepTime = response.data.prepTime;
+          this.recipe.cookTime = response.data.cookTime;
+          this.recipe.ingredients = response.data.ingredients;
+          this.recipe.method = response.data.method;
+        })
+        .catch(function(error) {
+          throw new Error("Error Getting Recipe From Database //  " + error);
+        });
     },
-    methods: {
-        async getRecipe () {
-            const response = await RecipeService.getRecipe({id: this.$route.params.id})
-                .then(response => {
-                    this.recipe.url = response.data.url;
-                    this.recipe.imageUrl = response.data.imageUrl;
-                    this.recipe.title = response.data.title;
-                    this.recipe.description = response.data.description;
-                    this.recipe.meal = response.data.meal;
-                    this.recipe.cuisine = response.data.cuisine;
-                    this.recipe.totalTime = response.data.totalTime;
-                    this.recipe.prepTime = response.data.prepTime;
-                    this.recipe.cookTime = response.data.cookTime;
-                    this.recipe.ingredients = response.data.ingredients;
-                    this.recipe.method = response.data.method;
-                })
-                .catch(function (error) {
-                    throw new Error("Error Getting Recipe From Database //  " + (error));
-                });    
-        },
-        addIngredient: function() {
-            this.recipe.ingredients.push({
-                item: "",
-                quantity: ""
-            });
-        },
-        removeIngredient: function(index) {
-            this.recipe.ingredients.splice(index, 1);
-        },
-        async onSubmit (evt) {
-            evt.preventDefault();
-            await RecipeService.updateRecipe({
-                id: this.$route.params.id,
-                url: this.recipe.url,
-                imageUrl: this.recipe.imageUrl,
-                title: this.recipe.title,
-                description: this.recipe.description,
-                meal: this.recipe.meal,
-                cuisine: this.recipe.cuisine,
-                totalTime: this.recipe.totalTime,
-                prepTime: this.recipe.prepTime,
-                cookTime: this.recipe.cookTime,
-                ingredients: this.recipe.ingredients,
-                method: this.recipe.method
-            });
-            this.$router.push({ name: 'recipes' });
-        }
+    addIngredient: function() {
+      this.recipe.ingredients.push({
+        item: "",
+        quantity: ""
+      });
     },
-    created() {
-        this.getRecipe();
+    removeIngredient: function(index) {
+      this.recipe.ingredients.splice(index, 1);
+    },
+    async onSubmit(evt) {
+      evt.preventDefault();
+      await RecipeService.updateRecipe({
+        id: this.$route.params.id,
+        url: this.recipe.url,
+        imageUrl: this.recipe.imageUrl,
+        title: this.recipe.title,
+        description: this.recipe.description,
+        meal: this.recipe.meal,
+        cuisine: this.recipe.cuisine,
+        totalTime: this.recipe.totalTime,
+        prepTime: this.recipe.prepTime,
+        cookTime: this.recipe.cookTime,
+        ingredients: this.recipe.ingredients,
+        method: this.recipe.method
+      });
+      this.$router.push({ name: "recipes" });
     }
+  },
+  created() {
+    this.getRecipe();
+  }
 });
 </script>
 <style type="text/scss">
 h4 {
-    font-size: 2em;
-    color: #4d7ef7;
-    margin-top: 0;
-    margin-bottom: 10px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
+  font-size: 2em;
+  color: #4d7ef7;
+  margin-top: 0;
+  margin-bottom: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
 }
 
 .dropdown-input {
-    max-width: 35%;
+  max-width: 35%;
 }
 
 .form-input {
-    text-align: center;
+  text-align: center;
 }
 </style>
-      

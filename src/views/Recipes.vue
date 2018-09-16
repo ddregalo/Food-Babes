@@ -13,28 +13,28 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import RecipeService from "../services/RecipeService";
-    import RecipeCards from "@/components/RecipeCards.vue";
+import Vue from "vue";
+import RecipeService from "../services/RecipeService";
+import RecipeCards from "@/components/RecipeCards.vue";
 
-    export default Vue.extend({
-        components: {
-            RecipeCards
-        }
-    });
+export default Vue.extend({
+  components: {
+    RecipeCards
+  }
+});
 </script>
 
 <style>
 h1 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 100px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #42b983;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 100px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #42b983;
 }
 
 .new-recipe-link {
-    margin: 50px;
+  margin: 50px;
 }
 </style>

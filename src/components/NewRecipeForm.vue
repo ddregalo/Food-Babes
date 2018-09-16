@@ -64,8 +64,8 @@ import Vue from "vue";
 import RecipeService from "@/services/RecipeService";
 
 export default Vue.extend({
-  name: 'NewRecipeForm',
-  data () {
+  name: "NewRecipeForm",
+  data() {
     return {
       recipe: {
         url: "",
@@ -81,14 +81,28 @@ export default Vue.extend({
         method: ""
       },
       meals: [
-        { text: 'Select One', value: null },
-        "Breakfast", "Lunch", "Snack", "Dinner", "Desert"
+        { text: "Select One", value: null },
+        "Breakfast",
+        "Lunch",
+        "Snack",
+        "Dinner",
+        "Desert"
       ],
       cuisines: [
-        { text: 'Select One', value: null },
-        "American", "Asian", "British", "Chinese", "Desert", "French", "Indian", "Italian", "Mexican", "Middle-Eastern", "Other" 
+        { text: "Select One", value: null },
+        "American",
+        "Asian",
+        "British",
+        "Chinese",
+        "Desert",
+        "French",
+        "Indian",
+        "Italian",
+        "Mexican",
+        "Middle-Eastern",
+        "Other"
       ]
-    }
+    };
   },
   methods: {
     addIngredient: function() {
@@ -98,29 +112,27 @@ export default Vue.extend({
       });
     },
     removeIngredient: function(index) {
-        this.recipe.ingredients.splice(index, 1);
+      this.recipe.ingredients.splice(index, 1);
     },
-    async onSubmit (evt) {
-        evt.preventDefault();
-        await RecipeService.addRecipe({
-            url: this.recipe.url,
-            imageUrl: this.recipe.imageUrl,
-            title: this.recipe.title,
-            description: this.recipe.description,
-            meal: this.recipe.meal,
-            cuisine: this.recipe.cuisine,
-            totalTime: this.recipe.totalTime,
-            prepTime: this.recipe.prepTime,
-            cookTime: this.recipe.cookTime,
-            ingredients: this.recipe.ingredients,
-            method: this.recipe.method
-        });
-        this.$router.push({ name: 'recipes' });
+    async onSubmit(evt) {
+      evt.preventDefault();
+      await RecipeService.addRecipe({
+        url: this.recipe.url,
+        imageUrl: this.recipe.imageUrl,
+        title: this.recipe.title,
+        description: this.recipe.description,
+        meal: this.recipe.meal,
+        cuisine: this.recipe.cuisine,
+        totalTime: this.recipe.totalTime,
+        prepTime: this.recipe.prepTime,
+        cookTime: this.recipe.cookTime,
+        ingredients: this.recipe.ingredients,
+        method: this.recipe.method
+      });
+      this.$router.push({ name: "recipes" });
     }
   }
 });
 </script>
 <style type="text/scss">
-
 </style>
-      

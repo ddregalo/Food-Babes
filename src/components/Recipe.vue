@@ -31,72 +31,74 @@
     </div>
 </template>
 <script lang="ts">
-    import Vue from "vue";
-    import RecipeService from "../services/RecipeService";
+import Vue from "vue";
+import RecipeService from "../services/RecipeService";
 
-    export default Vue.extend({
-        name: 'RecipeCards',
-        props: [],
-        data() {
-            return {
-                recipe: {
-                    url: "",
-                    imageUrl: "",
-                    title: "",
-                    description: "",
-                    meal: "",
-                    cuisine: "",
-                    totalTime: "",
-                    prepTime: "",
-                    cookTime: "",
-                    ingredients: [],
-                    method: ""
-                }
-            }
-        },
-        methods: {
-            async getRecipe () {
-                const response = await RecipeService.getRecipe({id: this.$route.params.id})
-                    .then(response => {
-                        this.recipe.url = response.data.url;
-                        this.recipe.imageUrl = response.data.imageUrl;
-                        this.recipe.title = response.data.title;
-                        this.recipe.description = response.data.description;
-                        this.recipe.meal = response.data.meal;
-                        this.recipe.cuisine = response.data.cuisine;
-                        this.recipe.totalTime = response.data.totalTime;
-                        this.recipe.prepTime = response.data.prepTime;
-                        this.recipe.cookTime = response.data.cookTime;
-                        this.recipe.ingredients = response.data.ingredients;
-                        this.recipe.method = response.data.method;
-                    })
-                    .catch(function (error) {
-                        throw new Error("Error Getting Recipe From Database //  " + (error));
-                    });    
-            }
-            // async deleteRecipe (id: any, index: number) {
-            //     await RecipeService.deleteRecipe(id);
-            //     this.recipe.splice(index, 1);
-            //     this.$router.push({ name: 'recipes' });
-            // }
-        },
+export default Vue.extend({
+  name: "RecipeCards",
+  props: [],
+  data() {
+    return {
+      recipe: {
+        url: "",
+        imageUrl: "",
+        title: "",
+        description: "",
+        meal: "",
+        cuisine: "",
+        totalTime: "",
+        prepTime: "",
+        cookTime: "",
+        ingredients: [],
+        method: ""
+      }
+    };
+  },
+  methods: {
+    async getRecipe() {
+      const response = await RecipeService.getRecipe({
+        id: this.$route.params.id
+      })
+        .then(response => {
+          this.recipe.url = response.data.url;
+          this.recipe.imageUrl = response.data.imageUrl;
+          this.recipe.title = response.data.title;
+          this.recipe.description = response.data.description;
+          this.recipe.meal = response.data.meal;
+          this.recipe.cuisine = response.data.cuisine;
+          this.recipe.totalTime = response.data.totalTime;
+          this.recipe.prepTime = response.data.prepTime;
+          this.recipe.cookTime = response.data.cookTime;
+          this.recipe.ingredients = response.data.ingredients;
+          this.recipe.method = response.data.method;
+        })
+        .catch(function(error) {
+          throw new Error("Error Getting Recipe From Database //  " + error);
+        });
+    }
+    // async deleteRecipe (id: any, index: number) {
+    //     await RecipeService.deleteRecipe(id);
+    //     this.recipe.splice(index, 1);
+    //     this.$router.push({ name: 'recipes' });
+    // }
+  },
 
-        mounted() {
-            this.getRecipe()
-        }
-    });
+  mounted() {
+    this.getRecipe();
+  }
+});
 </script>
 <style scoped lang="scss">
 p {
-    color: black;
+  color: black;
 }
 .align-top {
-    vertical-align: top;
+  vertical-align: top;
 }
 .container {
-    width: 100%;
+  width: 100%;
 }
 .recipe-card {
-    margin: 15px;
+  margin: 15px;
 }
 </style>

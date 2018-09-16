@@ -28,72 +28,70 @@
     </div>
 </template>
 <script lang="ts">
-    import Vue from "vue";
-    import RecipeService from "../services/RecipeService";
+import Vue from "vue";
+import RecipeService from "../services/RecipeService";
 
-    export default Vue.extend({
-        name: 'RecipeCards',
-        props: [],
-        data() {
-            return {
-                recipes: [] as any[],
-                ingredients: [] as any[]
-            }
-        },
-        methods: {
-            async getAllRecipes () {
-                var self = this;
-                try {
-                    const response = await RecipeService.getRecipes();
-                    var allRecipes = await response.data.recipes;
-                    await allRecipes.forEach(function(recipe: any) {
-                        self.ingredients.push(recipe.ingredients);
-                    });
-                    return this.recipes = allRecipes;
-                }
-                catch (err)
-                {
-                    alert("Error Message Log: " + err)
-                }   
-            },
-            async deleteRecipe (id: any, index: number) {
-                await RecipeService.deleteRecipe(id);
-                this.recipes.splice(index, 1);
-                this.$router.push({ name: 'recipes' });
-            }
-        },
+export default Vue.extend({
+  name: "RecipeCards",
+  props: [],
+  data() {
+    return {
+      recipes: [] as any[],
+      ingredients: [] as any[]
+    };
+  },
+  methods: {
+    async getAllRecipes() {
+      var self = this;
+      try {
+        const response = await RecipeService.getRecipes();
+        var allRecipes = await response.data.recipes;
+        await allRecipes.forEach(function(recipe: any) {
+          self.ingredients.push(recipe.ingredients);
+        });
+        return (this.recipes = allRecipes);
+      } catch (err) {
+        alert("Error Message Log: " + err);
+      }
+    },
+    async deleteRecipe(id: any, index: number) {
+      await RecipeService.deleteRecipe(id);
+      this.recipes.splice(index, 1);
+      this.$router.push({ name: "recipes" });
+    }
+  },
 
-        mounted() {
-            this.getAllRecipes()
-        }
-    });
+  mounted() {
+    this.getAllRecipes();
+  }
+});
 </script>
 <style scoped lang="scss">
 p {
-    color: black;
-    font-size: 0.9em;
+  color: black;
+  font-size: 0.9em;
 }
 .align-top {
-    vertical-align: top;
+  vertical-align: top;
 }
 .meal {
-    text-transform: uppercase;
-    color: gray;
-    font-weight: 600;
-    letter-spacing: 4px;
+  text-transform: uppercase;
+  color: gray;
+  font-weight: 600;
+  letter-spacing: 4px;
 }
 .recipe-card {
-    margin: 15px;
-    text-transform: capitalize;
-    font-size: 1em;
+  margin: 15px;
+  text-transform: capitalize;
+  font-size: 1em;
 }
 #recipe-link-button {
-    color: white;
-    margin: 0 15px 0 15px;
+  color: white;
+  margin: 0 15px 0 15px;
 }
 #view-recipe-button {
-    color: #42b983;
-    font-size: 0.8em;
-    margin-top: 20px;
+  color: #42b983;
+  font-size: 0.8em;
+  margin-top: 20px;
 }
 </style>

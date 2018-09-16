@@ -9,11 +9,11 @@
 
 <script type="ts">
 import Vue from "vue";
-import RecipeService from '@/services/RecipeService'
+import RecipeService from "@/services/RecipeService";
 import NewRecipeForm from "@/components/NewRecipeForm.vue";
 
-export default Vue.extend ({
-  name: 'NewRecipe',
+export default Vue.extend({
+  name: "NewRecipe",
   components: {
     NewRecipeForm
   }
