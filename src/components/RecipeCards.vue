@@ -6,17 +6,19 @@
                 :img-src="recipe.imageUrl"
                 img-alt="Recipe Food Image"
                 img-top
+                rounded
                 tag="article"
                 style="max-width: 14rem;"
                 class="recipe-card">
-                    <p>
-                        <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
-                        <span>{{ recipe.meal }}</span><br/>
-                        <span>{{ recipe.cuisine }}</span><br/>
-                        <span>{{ recipe.totalTime }}</span><br/>
+                    <p class="mb-0">
+                        <span class="meal mt-3">{{ recipe.meal }}</span><br/>
+                        <span><font-awesome-icon icon="clock" />    {{ recipe.totalTime }} MINS</span>
+                        <br/>
+                        <br/>
+                        <b-button size="sm" variant="primary"><a id="recipe-link-button" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a><br/></b-button>
                     </p>
                     <div class="mb-3">
-                        <b-button variant="primary"><router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">SELECT</router-link></b-button>
+                        <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
                     </div>
                     <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
                     <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
@@ -74,12 +76,24 @@ p {
 .align-top {
     vertical-align: top;
 }
+.meal {
+    text-transform: uppercase;
+    color: gray;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
 .recipe-card {
     margin: 15px;
     text-transform: capitalize;
     font-size: 1em;
 }
+#recipe-link-button {
+    color: white;
+    margin: 0 15px 0 15px;
+}
 #view-recipe-button {
-    color: white
+    color: #42b983;
+    font-size: 0.8em;
+    margin-top: 20px;
 }
 </style>
