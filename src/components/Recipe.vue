@@ -1,34 +1,31 @@
 <template>
-    <div class="container">
-        <b-card-group deck class="align-items-top d-flex justify-content-center">
-            <div class="card-group">
-                <b-card :title="recipe.title"
-                :img-src="recipe.imageUrl"
-                img-alt="Default Recipe Food Image"
-                img-top
-                tag="article"
-                style="max-width: 30rem;"
-                class="recipe-card">
-                    <p>
-                        <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
-                        <span>{{ recipe.description }}</span><br/>
-                        <span>{{ recipe.meal }}</span><br/>
-                        <span>{{ recipe.cuisine }}</span><br/>
-                        <span>{{ recipe.totalTime }}</span><br/>
-                        <span>{{ recipe.prepTime }}</span><br/>
-                        <span>{{ recipe.cookTime }}</span><br/>
-                        <span style="display: inline;" v-for="(ingredient, index) in recipe.ingredients" :key="index">
-                            <span class="mr-3">{{ ingredient.item }}</span>
-                            <span>{{ ingredient.quantity }}</span><br>
-                        </span>
-                        <span>{{ recipe.method }}</span>
-                    </p>
-                    <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
-                    <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
-                </b-card>
-            </div>
-        </b-card-group>
-    </div>
+  <div class="container mt-2">
+    <hr/>
+    <div class="row mt-5">
+      <div class="col-xs-8 image">
+        <b-img-lazy class="" rounded :src="recipe.imageUrl" fluid alt="Recipe Main Image"/>
+      </div>
+      <div class="col-xs-4 pl-5 recipe-text">
+        <h4>{{recipe.title}}</h4>
+        <p>
+          <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
+          <span>{{ recipe.description }}</span><br/>
+          <span>{{ recipe.meal }}</span><br/>
+          <span>{{ recipe.cuisine }}</span><br/>
+          <span>{{ recipe.totalTime }}</span><br/>
+          <span>{{ recipe.prepTime }}</span><br/>
+          <span>{{ recipe.cookTime }}</span><br/>
+          <span style="display: inline;" v-for="(ingredient, index) in recipe.ingredients" :key="index">
+            <span class="mr-3">{{ ingredient.item }}</span>
+            <span>{{ ingredient.quantity }}</span><br>
+          </span>
+          <span>{{ recipe.method }}</span>
+        </p>
+        <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
+        <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
+      </div>
+    </div> 
+  </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -88,17 +85,34 @@ export default Vue.extend({
   }
 });
 </script>
-<style scoped lang="scss">
+<style scoped lang="scss"> 
+h4 {
+  color: #2c3e50;
+}
+
 p {
   color: black;
 }
+
 .align-top {
   vertical-align: top;
 }
+
 .container {
-  width: 100%;
+  width: 70%;
 }
+
+.image {
+  width: 40%;
+  float: left;
+  height: 400px;
+}
+
 .recipe-card {
   margin: 15px;
+}
+
+.recipe-text {
+  text-align: left;
 }
 </style>
