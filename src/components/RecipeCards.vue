@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div>
         <b-card-group deck class="align-items-top d-flex justify-content-center">
             <div v-for="(recipe, index) in recipes" :key="recipe._id" class="card-group">
                 <b-card :title="recipe.title"
@@ -11,13 +11,13 @@
                 style="max-width: 14rem;"
                 class="recipe-card">
                     <p class="mb-0">
-                        <span class="meal mt-3">{{ recipe.meal }}</span><br/>
-                        <span><font-awesome-icon icon="clock" />    {{ recipe.totalTime }} MINS</span>
+                        <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
+                        <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
                         <br/>
                         <br/>
                         <b-button size="sm" variant="primary"><a id="recipe-link-button" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a><br/></b-button>
                     </p>
-                    <div class="mb-3">
+                    <div class="mt-3 mb-1">
                         <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
                     </div>
                     <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
@@ -69,29 +69,35 @@ export default Vue.extend({
 <style scoped lang="scss">
 p {
   color: black;
-  font-size: 0.9em;
+  font-size: 1.5em;
+  margin: 0 auto;
+  padding-top: 0px;
 }
 .align-top {
   vertical-align: top;
 }
-.meal {
-  text-transform: uppercase;
-  color: gray;
-  font-weight: 600;
-  letter-spacing: 4px;
-}
 .recipe-card {
   margin: 15px;
   text-transform: capitalize;
-  font-size: 1em;
+  font-size: 0.7em;
+}
+#cook-time {
+    color: rgb(95, 95, 95);
+    font-size: 0.8em;
+}
+#meal {
+  text-transform: uppercase;
+  color: rgb(153, 153, 153);
+  font-weight: 600;
+  letter-spacing: 4px;
+  font-size: 0.8em;
 }
 #recipe-link-button {
   color: white;
   margin: 0 15px 0 15px;
 }
 #view-recipe-button {
-  color: #42b983;
-  font-size: 0.8em;
-  margin-top: 20px;
+//   color: #42b983;
+  font-size: 1.2em;
 }
 </style>
