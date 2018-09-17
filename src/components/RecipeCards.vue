@@ -1,30 +1,33 @@
 <template>
     <div>
-        <b-card-group deck class="align-items-top d-flex justify-content-center">
-            <div v-for="(recipe, index) in recipes" :key="recipe._id" class="card-group">
-                <b-card :title="recipe.title"
-                :img-src="recipe.imageUrl"
-                img-alt="Recipe Food Image"
-                img-top
-                rounded
-                tag="article"
-                style="max-width: 14rem;"
-                class="recipe-card">
-                    <p class="mb-0">
-                        <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
-                        <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
-                        <br/>
-                        <br/>
-                        <b-button size="sm" variant="primary"><a id="recipe-link-button" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a><br/></b-button>
-                    </p>
-                    <div class="mt-3 mb-1">
-                        <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
-                    </div>
-                    <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
-                    <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
-                </b-card>
-            </div>
-        </b-card-group>
+      <div class="search-wrapper">
+        <input type="text" v-model="search" placeholder="Search recipes by ingredient..."/>
+      </div>
+      <b-card-group deck class="align-items-top d-flex justify-content-center">
+          <div v-for="(recipe, index) in filteredRecipes" :key="recipe._id" class="card-group">
+              <b-card :title="recipe.title"
+              :img-src="recipe.imageUrl"
+              img-alt="Recipe Food Image"
+              img-top
+              rounded
+              tag="article"
+              style="max-width: 14rem;"
+              class="recipe-card">
+                  <p class="mb-0">
+                      <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
+                      <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
+                      <br/>
+                      <br/>
+                      <b-button size="sm" variant="primary"><a id="recipe-link-button" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a><br/></b-button>
+                  </p>
+                  <div class="mt-3 mb-1">
+                      <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
+                  </div>
+                  <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> |
+                  <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a>
+              </b-card>
+          </div>
+      </b-card-group>
     </div>
 </template>
 <script lang="ts">
@@ -33,9 +36,9 @@ import RecipeService from "../services/RecipeService";
 
 export default Vue.extend({
   name: "RecipeCards",
-  props: [],
   data() {
     return {
+      search: "",
       recipes: [] as any[],
       ingredients: [] as any[]
     };
@@ -60,7 +63,17 @@ export default Vue.extend({
       this.$router.push({ name: "recipes" });
     }
   },
-
+  computed: {
+    filteredRecipes: function(): any[] {
+      return this.recipes.filter(recipe => {
+        const recipeIngredients = [] as any [];
+        recipe.ingredients.forEach(function(ingredient: any) {
+        recipeIngredients.push(ingredient.item.toLowerCase())
+        });
+        return recipeIngredients.join(" ").match(this.search.toLowerCase());
+      })
+    }
+  },
   mounted() {
     this.getAllRecipes();
   }
@@ -80,6 +93,29 @@ p {
   margin: 15px;
   text-transform: capitalize;
   font-size: 0.7em;
+}
+.search-wrapper {
+  position: relative;
+  input {
+    padding: 4px 12px;
+    color: rgba(0,0,0,.70);
+    border: 1px solid rgba(0,0,0,.12);
+    transition: .15s all ease-in-out;
+    background: white;
+    &:focus {
+      outline: none;
+      transform: scale(1.05);
+      & + label  {
+        font-size: 10px;
+        transform: translateY(-24px) translateX(-12px);
+      }
+    }
+    &::-webkit-input-placeholder {
+      font-size: 12px;
+      color: rgba(0,0,0,.50);
+      font-weight: 100;
+    }
+  }
 }
 #cook-time {
     color: rgb(95, 95, 95);
