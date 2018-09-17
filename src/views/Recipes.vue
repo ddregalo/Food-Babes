@@ -7,6 +7,9 @@
             </div>
         </div>
         <div>
+            <hr/>
+        </div>
+        <div>
             <RecipeCards></RecipeCards>
         </div>
     </div>
