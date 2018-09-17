@@ -6,10 +6,7 @@
                 <router-link to="/recipes/new">New Recipe</router-link>
             </div>
         </div>
-        <div>
-            <hr/>
-        </div>
-        <div>
+        <div class="mt-5">
             <RecipeCards></RecipeCards>
         </div>
     </div>
@@ -38,6 +35,6 @@ h1 {
 }
 
 .new-recipe-link {
-  margin: 50px;
+  margin: 20px;
 }
 </style>

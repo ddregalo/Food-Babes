@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="search-wrapper">
+      <div class="search-wrapper mb-5">
         <input type="text" v-model="search" placeholder="Search recipes by ingredient..."/>
       </div>
       <b-card-group deck class="align-items-top d-flex justify-content-center">
@@ -97,6 +97,9 @@ p {
 .search-wrapper {
   position: relative;
   input {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
     padding: 4px 12px;
     color: rgba(0,0,0,.70);
     border: 1px solid rgba(0,0,0,.12);
