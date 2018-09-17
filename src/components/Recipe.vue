@@ -33,7 +33,6 @@ import RecipeService from "../services/RecipeService";
 
 export default Vue.extend({
   name: "RecipeCards",
-  props: [],
   data() {
     return {
       recipe: {
