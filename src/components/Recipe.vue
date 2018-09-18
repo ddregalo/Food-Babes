@@ -113,5 +113,6 @@ p {
 
 .recipe-text {
   text-align: left;
+  max-width: 500px;
 }
 </style>
