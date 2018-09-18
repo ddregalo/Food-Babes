@@ -9,17 +9,18 @@
               :img-src="recipe.imageUrl"
               img-alt="Recipe Food Image"
               img-top
+              img-fluid
               rounded
               tag="article"
-              style="max-width: 14rem;"
+              style="max-width: 15rem;"
               class="recipe-card">
-                  <p class="mb-0">
-                      <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
-                      <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
-                      <br/>
-                      <br/>
-                      <b-button size="sm" variant="primary"><a id="recipe-link-button" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a><br/></b-button>
-                  </p>
+                <p class="mb-0">
+                    <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
+                    <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
+                    <br/>
+                    <br/>
+                    <b-button size="sm" variant="primary" class="recipe-link-button"><a class="recipe-link" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a></b-button>
+                </p>
                   <div class="mt-3 mb-1">
                       <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
                   </div>
@@ -66,12 +67,12 @@ export default Vue.extend({
   computed: {
     filteredRecipes: function(): any[] {
       return this.recipes.filter(recipe => {
-        const recipeIngredients = [] as any [];
+        const recipeIngredients = [] as any[];
         recipe.ingredients.forEach(function(ingredient: any) {
-        recipeIngredients.push(ingredient.item.toLowerCase())
+          recipeIngredients.push(ingredient.item.toLowerCase());
         });
         return recipeIngredients.join(" ").match(this.search.toLowerCase());
-      })
+      });
     }
   },
   mounted() {
@@ -101,28 +102,29 @@ p {
     -moz-border-radius: 50px;
     border-radius: 50px;
     padding: 4px 12px;
-    color: rgba(0,0,0,.70);
-    border: 1px solid rgba(0,0,0,.12);
-    transition: .15s all ease-in-out;
+    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    transition: 0.15s all ease-in-out;
     background: white;
+    width: 30%;
     &:focus {
       outline: none;
       transform: scale(1.05);
-      & + label  {
+      & + label {
         font-size: 10px;
         transform: translateY(-24px) translateX(-12px);
       }
     }
     &::-webkit-input-placeholder {
       font-size: 12px;
-      color: rgba(0,0,0,.50);
+      color: rgba(0, 0, 0, 0.5);
       font-weight: 100;
     }
   }
 }
 #cook-time {
-    color: rgb(95, 95, 95);
-    font-size: 0.8em;
+  color: rgb(95, 95, 95);
+  font-size: 0.8em;
 }
 #meal {
   text-transform: uppercase;
@@ -131,12 +133,18 @@ p {
   letter-spacing: 4px;
   font-size: 0.8em;
 }
-#recipe-link-button {
+.recipe-link {
   color: white;
   margin: 0 15px 0 15px;
 }
-#view-recipe-button {
-//   color: #42b983;
+
+.recipe-link-button {
+  color: white;
+  background-color: rgb(41, 59, 212);
+}
+
+.view-recipe-button {
+  //   color: #42b983;
   font-size: 1.2em;
 }
 </style>
