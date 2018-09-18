@@ -84,7 +84,7 @@ export default Vue.extend({
   }
 });
 </script>
-<style scoped lang="scss"> 
+<style scoped lang="scss">
 h4 {
   color: #2c3e50;
 }
