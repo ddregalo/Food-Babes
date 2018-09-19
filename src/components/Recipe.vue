@@ -7,28 +7,28 @@
       </div>
       <div class="col-xs-4 pl-5 recipe-text">
         <h4>{{recipe.title}}</h4>
-          <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE LINK</a><br/>
-          <p class="label-title">DESCRIPTION</p>
-          <span>{{ recipe.description }}</span><br/>
-          <p class="label-title">MEAL</p>
-          <span>{{ recipe.meal }}</span><br/>
-          <p class="label-title">CUISINE</p>
-          <span>{{ recipe.cuisine }}</span><br/>
-          <p class="label-title">TOTAL TIME TO TABLE</p>
-          <span>{{ recipe.totalTime }}</span><br/>
-          <p class="label-title">PREP TIME</p>
-          <span>{{ recipe.prepTime }}</span><br/>
-          <p class="label-title">COOK TIME</p>
-          <span>{{ recipe.cookTime }}</span><br/>
-          <p class="label-title">INGREDIENTS</p>
-          <span style="display: inline;" v-for="(ingredient, index) in recipe.ingredients" :key="index">
-            <span class="mr-3">{{ ingredient.item }}</span>
-            <span>{{ ingredient.quantity }}</span><br>
-          </span>
-          <p class="label-title">METHOD</p>
-          <span>{{ recipe.method }}</span>
-        <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
-        <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
+        <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE LINK</a><br/>
+        <p class="label-title">DESCRIPTION</p>
+        <span>{{ recipe.description }}</span><br/>
+        <p class="label-title">MEAL</p>
+        <span>{{ recipe.meal }}</span><br/>
+        <p class="label-title">CUISINE</p>
+        <span>{{ recipe.cuisine }}</span><br/>
+        <p class="label-title">TOTAL TIME TO TABLE</p>
+        <span>{{ recipe.totalTime }}</span><br/>
+        <p class="label-title">PREP TIME</p>
+        <span>{{ recipe.prepTime }}</span><br/>
+        <p class="label-title">COOK TIME</p>
+        <span>{{ recipe.cookTime }}</span><br/>
+        <p class="label-title">INGREDIENTS</p>
+        <span style="display: inline;" v-for="(ingredient, index) in recipe.ingredients" :key="index">
+          <span class="mr-3">{{ ingredient.item }}</span>
+          <span>{{ ingredient.quantity }}</span><br>
+        </span>
+        <p class="label-title">METHOD</p>
+        <span>{{ recipe.method }}</span>
+      <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
+      <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
       </div>
     </div> 
   </div>
@@ -127,7 +127,7 @@ span {
 }
 
 .label-title {
-  color:rgb(133, 132, 132);
+  color: rgb(133, 132, 132);
   font-size: 0.7em;
   font-weight: 600;
   margin: 10px 0 0 0;

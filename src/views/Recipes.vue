@@ -39,7 +39,7 @@ h1 {
 }
 
 a:hover {
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .btn {
@@ -52,7 +52,7 @@ a:hover {
 }
 
 .link-text {
-  color:rgb(41, 59, 212);
+  color: rgb(41, 59, 212);
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 1.1em;
