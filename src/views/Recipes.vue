@@ -1,5 +1,6 @@
 <template>
     <div>
+      <h1>hey</h1>
         <div class="title">
             <h1>recipes</h1>
             <div class="new-recipe-link">
