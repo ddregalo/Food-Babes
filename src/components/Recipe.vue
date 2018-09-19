@@ -3,24 +3,30 @@
     <hr/>
     <div class="row mt-5">
       <div class="col-xs-8 image">
-        <b-img-lazy class="" rounded :src="recipe.imageUrl" fluid alt="Recipe Main Image"/>
+        <b-img class="" rounded :src="recipe.imageUrl" fluid alt="Recipe Main Image"/>
       </div>
       <div class="col-xs-4 pl-5 recipe-text">
         <h4>{{recipe.title}}</h4>
-        <p>
-          <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE SOURCE</a><br/>
+          <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE LINK</a><br/>
+          <p class="label-title">DESCRIPTION</p>
           <span>{{ recipe.description }}</span><br/>
+          <p class="label-title">MEAL</p>
           <span>{{ recipe.meal }}</span><br/>
+          <p class="label-title">CUISINE</p>
           <span>{{ recipe.cuisine }}</span><br/>
+          <p class="label-title">TOTAL TIME TO TABLE</p>
           <span>{{ recipe.totalTime }}</span><br/>
+          <p class="label-title">PREP TIME</p>
           <span>{{ recipe.prepTime }}</span><br/>
+          <p class="label-title">COOK TIME</p>
           <span>{{ recipe.cookTime }}</span><br/>
+          <p class="label-title">INGREDIENTS</p>
           <span style="display: inline;" v-for="(ingredient, index) in recipe.ingredients" :key="index">
             <span class="mr-3">{{ ingredient.item }}</span>
             <span>{{ ingredient.quantity }}</span><br>
           </span>
+          <p class="label-title">METHOD</p>
           <span>{{ recipe.method }}</span>
-        </p>
         <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
         <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
       </div>
@@ -93,6 +99,10 @@ p {
   color: black;
 }
 
+span {
+  font-size: 14px;
+}
+
 .align-top {
   vertical-align: top;
 }
@@ -114,5 +124,12 @@ p {
 .recipe-text {
   text-align: left;
   max-width: 500px;
+}
+
+.label-title {
+  color:rgb(133, 132, 132);
+  font-size: 0.7em;
+  font-weight: 600;
+  margin: 10px 0 0 0;
 }
 </style>
