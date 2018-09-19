@@ -10,12 +10,14 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faCoffee);
 library.add(faClock);
 library.add(faPlusCircle);
+library.add(faLink);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

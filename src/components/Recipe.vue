@@ -6,8 +6,10 @@
         <b-img class="" rounded :src="recipe.imageUrl" fluid alt="Recipe Main Image"/>
       </div>
       <div class="col-xs-4 pl-5 recipe-text">
-        <h4>{{recipe.title}}</h4>
-        <a v-if="recipe.url" :href="recipe.url" target="_blank">RECIPE LINK</a><br/>
+        <h4>
+          {{recipe.title}}
+          <span class="ml-2" v-if="recipe.url"><a :href="recipe.url" target="_blank"><font-awesome-icon color="#42b983" size="2x" icon="link" /></a></span>
+        </h4>
         <p class="label-title">DESCRIPTION</p>
         <span>{{ recipe.description }}</span><br/>
         <p class="label-title">MEAL</p>
