@@ -12,12 +12,22 @@
         </h4>
         <p class="label-title">DESCRIPTION</p>
         <span>{{ recipe.description }}</span><br/>
-        <p class="label-title">MEAL</p>
-        <span>{{ recipe.meal }}</span><br/>
-        <p class="label-title">CUISINE</p>
-        <span>{{ recipe.cuisine }}</span><br/>
-        <p class="label-title">TOTAL TIME TO TABLE</p>
-        <span>{{ recipe.totalTime }}</span><br/>
+        <div>
+          <div class="row d-flex justify-content-left group">
+            <div class="mr-5">
+              <p class="label-title">MEAL</p>
+              <span>{{ recipe.meal }}</span><br/>
+            </div>
+            <div>
+              <p class="label-title mr-5">CUISINE</p>
+              <span>{{ recipe.cuisine }}</span><br/>
+            </div>
+            <div>
+              <p class="label-title">TIME TO TABLE</p>
+              <span><font-awesome-icon class="mr-2" color="grey" icon="clock" /> {{ recipe.totalTime }}</span><br/>
+            </div>
+          </div>  
+        </div>
         <p class="label-title">PREP TIME</p>
         <span>{{ recipe.prepTime }}</span><br/>
         <p class="label-title">COOK TIME</p>
@@ -111,6 +121,10 @@ span {
 
 .container {
   width: 70%;
+}
+
+.group {
+  margin-left: 1px;
 }
 
 .image {
