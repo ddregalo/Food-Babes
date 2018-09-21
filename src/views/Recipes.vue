@@ -1,14 +1,11 @@
 <template>
     <div>
-      <h1>hey</h1>
         <div class="title">
             <h1>recipes</h1>
             <div class="new-recipe-link">
-              <!-- <b-button class="btn btn-outline-success my-2 my-sm-0"> -->
                 <router-link to="/recipes/new"><font-awesome-icon size="2x" class="link" style="color:rgb(41, 59, 212);" icon="plus-circle" />
                   <span class="link-text">NEW RECIPE</span>
                 </router-link>
-              <!-- </b-button> -->
             </div>
         </div>
         <div class="mt-5">
