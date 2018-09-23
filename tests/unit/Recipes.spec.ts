@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-const Recipes = require('../../src/views/Recipes');
+const Recipes = require('../../src/views/Recipes.vue');
 
 describe('Recipes View', () => {
   const wrapper = shallowMount(Recipes);
