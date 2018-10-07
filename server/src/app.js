@@ -4,6 +4,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const Recipe = require('../models/recipe.js')
+require('dotenv').config();
+const PUSHER = require('pusher');
+const { PUSHER_APP_ID, PUSHER_KEY, PUSHER_SECRET, CLUSTER, TIME } = process.env;
+
+const pusher = new PUSHER({
+  appId: PUSHER_APP_ID,
+  key: PUSHER_KEY,
+  secret: PUSHER_SECRET,
+  cluster: CLUSTER,
+  encrypted: true
+});
 
 const app = express()
 
