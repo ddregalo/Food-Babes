@@ -14,4 +14,11 @@ describe("Recipes View", () => {
         cy.get('.link-text').contains("NEW RECIPE");
     });
 
+    it("has functional recipe search filter", () => {
+        cy.get('input').type("lentils");
+        cy.contains("Vegan Lentil Moussaka");
+        cy.contains("Dinner");
+        cy.contains("60 MINS");
+    });
+
 });
