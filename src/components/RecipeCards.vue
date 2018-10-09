@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="search-wrapper mb-5">
-        <input type="text" v-model="search" placeholder="Search recipes by ingredient..."/>
+        <input type="text" v-model="search" placeholder="Search recipes..."/>
       </div>
       <b-card-group deck class="align-items-top d-flex justify-content-center">
           <div v-for="(recipe, index) in filteredRecipes" :key="recipe._id" class="card-group">
@@ -14,13 +14,13 @@
               tag="article"
               style="max-width: 15rem;"
               class="recipe-card">
-                <p class="mb-0">
-                    <span id="meal" class="mt-3">{{ recipe.meal }}</span><br/>
-                    <span id="cook-time"><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
+                <div>
+                    <p id="cuisine">{{ recipe.cuisine }}</p><br/>
+                    <span id="cook-time"><span id="meal">{{ recipe.meal }}</span><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
                     <br/>
                     <br/>
                     <b-button size="sm" variant="primary" class="recipe-link-button"><a class="recipe-link" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a></b-button>
-                </p>
+                </div>
                   <div class="mt-3 mb-1">
                       <router-link id="view-recipe-button" v-bind:to="{ name: 'Recipe', params: { id: recipe._id } }">NOTES</router-link>
                   </div>
@@ -71,7 +71,11 @@ export default Vue.extend({
         recipe.ingredients.forEach(function(ingredient: any) {
           recipeIngredients.push(ingredient.item.toLowerCase());
         });
-        return recipeIngredients.join(" ").match(this.search.toLowerCase());
+        var cuisine = recipe.cuisine.toLowerCase();
+        var title = recipe.title.toLowerCase();
+        return recipeIngredients.join(" ").match(this.search.toLowerCase()) ||
+          cuisine.match(this.search.toLowerCase()) ||
+          title.match(this.search.toLowerCase());
       });
     }
   },
@@ -124,14 +128,24 @@ p {
 }
 #cook-time {
   color: rgb(95, 95, 95);
-  font-size: 0.8em;
+  font-size: 1.2em;
+  padding-top: 0px;
+}
+#cuisine {
+  padding-top: 5px;
+  text-transform: uppercase;
+  color: rgb(170, 169, 169);
+  font-weight: 400;
+  letter-spacing: 4px;
+  font-size: 1.2em;
 }
 #meal {
+  padding-right: 10px;
   text-transform: uppercase;
   color: rgb(153, 153, 153);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 4px;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .recipe-link {
   color: white;
