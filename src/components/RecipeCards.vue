@@ -16,9 +16,9 @@
               class="recipe-card">
                 <div>
                     <p id="cuisine">{{ recipe.cuisine }}</p><br/>
+                    <div id="spacer">
                     <span id="cook-time"><span id="meal">{{ recipe.meal }}</span><font-awesome-icon color="grey" icon="clock" />    {{ recipe.totalTime }} MINS</span>
-                    <br/>
-                    <br/>
+                    </div>
                     <b-button size="sm" variant="primary" class="recipe-link-button"><a class="recipe-link" v-if="recipe.url" :href="recipe.url" target="_blank">SELECT</a></b-button>
                 </div>
                   <div class="mt-3 mb-1">
@@ -146,6 +146,9 @@ p {
   font-weight: 500;
   letter-spacing: 4px;
   font-size: 1em;
+}
+#spacer{
+  padding-bottom:50px;
 }
 .recipe-link {
   color: white;
