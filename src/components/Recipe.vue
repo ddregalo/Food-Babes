@@ -39,8 +39,6 @@
         </span>
         <p class="label-title">METHOD</p>
         <span>{{ recipe.method }}</span>
-      <!-- <router-link v-bind:to="{ name: 'UpdateRecipe', params: { id: recipe._id } }">Edit</router-link> | -->
-      <!-- <a href="#" @click="deleteRecipe(recipe._id, index)">Delete</a> -->
       </div>
     </div> 
   </div>
@@ -90,11 +88,6 @@ export default Vue.extend({
           throw new Error("Error Getting Recipe From Database //  " + error);
         });
     }
-    // async deleteRecipe (id: any, index: number) {
-    //     await RecipeService.deleteRecipe(id);
-    //     this.recipe.splice(index, 1);
-    //     this.$router.push({ name: 'recipes' });
-    // }
   },
 
   mounted() {
