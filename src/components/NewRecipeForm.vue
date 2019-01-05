@@ -60,7 +60,9 @@
 </template>
 
 <script type="ts">
-import Vue from "vue";
+import Vue from 'vue';
+import Vuew from 'vuex';
+import { store } from '@/store.ts';
 import RecipeService from "@/services/RecipeService";
 
 export default Vue.extend({
@@ -80,28 +82,8 @@ export default Vue.extend({
         ingredients: [],
         method: ""
       },
-      meals: [
-        { text: "Select One", value: null },
-        "Breakfast",
-        "Lunch",
-        "Snack",
-        "Dinner",
-        "Desert"
-      ],
-      cuisines: [
-        { text: "Select One", value: null },
-        "American",
-        "Asian",
-        "British",
-        "Chinese",
-        "Desert",
-        "French",
-        "Indian",
-        "Italian",
-        "Mexican",
-        "Middle-Eastern",
-        "Other"
-      ]
+      meals: this.$store.state.meals,
+      cuisines: this.$store.state.cuisines,
     };
   },
   methods: {
