@@ -32,8 +32,8 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import RecipeService from "../services/RecipeService";
+import Vue from 'vue';
+import RecipeService from '../services/RecipeService';
 
 export default Vue.extend({
   name: "RecipeCards",
@@ -41,11 +41,12 @@ export default Vue.extend({
     return {
       search: "",
       recipes: [] as any[],
-      ingredients: [] as any[]
+      ingredients: [] as any[],
     };
   },
   methods: {
     async getAllRecipes() {
+      console.log('in method');
       var self = this;
       try {
         const response = await RecipeService.getRecipes();
@@ -66,7 +67,7 @@ export default Vue.extend({
   },
   computed: {
     filteredRecipes: function(): any[] {
-      return this.recipes.filter(recipe => {
+      return this.recipes.filter((recipe: any) => {
         const recipeIngredients = [] as any[];
         recipe.ingredients.forEach(function(ingredient: any) {
           recipeIngredients.push(ingredient.item.toLowerCase());
@@ -77,10 +78,10 @@ export default Vue.extend({
           cuisine.match(this.search.toLowerCase()) ||
           title.match(this.search.toLowerCase());
       });
-    }
+    },
   },
-  mounted() {
-    this.getAllRecipes();
+  async mounted() {
+    await this.getAllRecipes();
   }
 });
 </script>
@@ -161,7 +162,6 @@ p {
 }
 
 .view-recipe-button {
-  //   color: #42b983;
   font-size: 1.2em;
 }
 </style>
