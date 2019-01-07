@@ -90,8 +90,8 @@ export default Vue.extend({
     }
   },
 
-  mounted() {
-    this.getRecipe();
+  async mounted() {
+    await this.getRecipe();
   }
 });
 </script>
