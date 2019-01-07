@@ -61,9 +61,11 @@
 
 <script type="ts">
 import Vue from 'vue';
-import Vuew from 'vuex';
+import Vuex from 'vuex';
 import { store } from '@/store.ts';
 import RecipeService from "@/services/RecipeService";
+
+Vue.use(Vuex);
 
 export default Vue.extend({
   name: "NewRecipeForm",
