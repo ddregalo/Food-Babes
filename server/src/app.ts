@@ -3,7 +3,7 @@ const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
-const Recipe = require('../models/recipe.js')
+const Recipe = require('../models/recipe.ts')
 require('dotenv').config();
 const PUSHER = require('pusher');
 const { PUSHER_APP_ID, PUSHER_KEY, PUSHER_SECRET, CLUSTER, TIME } = process.env;

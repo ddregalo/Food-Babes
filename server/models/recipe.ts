@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var Mongoose = require("mongoose");
+var Schema = Mongoose.Schema;
 
 var RecipeSchema = new Schema({
     url: String,
@@ -21,5 +21,5 @@ var RecipeSchema = new Schema({
     method: String
 });
 
-var Recipe = mongoose.model("Recipe", RecipeSchema);
+var recipe = Mongoose.model("Recipe", RecipeSchema);
 module.exports = Recipe;
