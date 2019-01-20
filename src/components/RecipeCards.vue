@@ -46,7 +46,6 @@ export default Vue.extend({
   },
   methods: {
     async getAllRecipes() {
-      console.log('in method');
       var self = this;
       try {
         const response = await RecipeService.getRecipes();
