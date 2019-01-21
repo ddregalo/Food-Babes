@@ -1,4 +1,4 @@
-// const version = 1;
+const version = "fb dynamic v1";
 
 workbox.setConfig({
     debug: false,
@@ -76,7 +76,7 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request).then((res) => {
       if (res) { return res; }
       return fetch(event.request).then((res) => {
-        return caches.open('1 - http://localhost:5000')
+        return caches.open(version)
           .then((cache) => {
             return cache.put(event.request, res.clone())
               .then((() => { return res }));
