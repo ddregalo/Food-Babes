@@ -11,7 +11,7 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import fontawesome from "@fortawesome/fontawesome";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import './registerServiceWorker'
 
 library.add(faCoffee);
