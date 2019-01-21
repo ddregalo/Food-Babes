@@ -22,4 +22,4 @@ var RecipeSchema = new Schema({
 });
 
 var recipe = Mongoose.model("Recipe", RecipeSchema);
-module.exports = Recipe;
+module.exports = recipe;
