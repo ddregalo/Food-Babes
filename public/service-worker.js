@@ -73,24 +73,15 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+    caches.match(event.request).then((res) => {
+      if (res) { return res; }
+      return fetch(event.request).then((res) => {
+        return caches.open('1 - http://localhost:5000')
+          .then((cache) => {
+            return cache.put(event.request, res.clone())
+              .then((() => { return res }));
+          })
+      });
     })
   );
 });
-
-// function fetchAndUpdate(request) {
-//   return fetch(request)
-//     .then(((res) => {
-//       if (res)
-//       {
-//         return caches.open(version)
-//           .then((cache) => {
-//             return cache.put(request, res.clone())
-//               .then((res) => {
-//                 return res;
-//               })
-//           })
-//       }
-//     }));
-// }
