@@ -94,6 +94,18 @@ p {
 .align-top {
   vertical-align: top;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.card-title {
+  font-size: 18px;
+  min-height: 40px;
+}
+
 .recipe-card {
   margin: 15px;
   text-transform: capitalize;
@@ -148,7 +160,7 @@ p {
   font-size: 1em;
 }
 #spacer{
-  padding-bottom:50px;
+  padding-bottom:20px;
 }
 .recipe-link {
   color: white;
