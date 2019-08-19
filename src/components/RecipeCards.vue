@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="search-wrapper mb-5">
-        <input type="text" v-model="search" placeholder="Search recipes..."/>
+        <input id="search-filter" type="text" data-role="tagsinput" v-model="search.word" placeholder="Search recipes..."/>
       </div>
       <b-card-group deck class="align-items-top d-flex justify-content-center">
           <div v-for="(recipe, index) in filteredRecipes" :key="recipe._id" class="card-group">
@@ -39,7 +39,9 @@ export default Vue.extend({
   name: "RecipeCards",
   data() {
     return {
-      search: "",
+      search: {
+        word: ""
+      },
       recipes: [] as any[],
       ingredients: [] as any[],
     };
@@ -73,9 +75,19 @@ export default Vue.extend({
         });
         var cuisine = recipe.cuisine.toLowerCase();
         var title = recipe.title.toLowerCase();
-        return recipeIngredients.join(" ").match(this.search.toLowerCase()) ||
-          cuisine.match(this.search.toLowerCase()) ||
-          title.match(this.search.toLowerCase());
+        
+        var filteredRecipes = recipeIngredients.join(" ").match(this.search.word.toLowerCase()) ||
+          cuisine.match(this.search.word.toLowerCase()) ||
+          title.match(this.search.word.toLowerCase());
+        
+        if (recipeIngredients.length > 0) {
+            var searchWordElement = document.getElementById("search-filter");
+            if (searchWordElement) {
+              searchWordElement.classList.add("search-match");
+            }
+          }
+
+        return filteredRecipes;
       });
     },
   },
@@ -111,6 +123,11 @@ p {
   text-transform: capitalize;
   font-size: 0.7em;
 }
+
+.search-match {
+  color: red;
+}
+
 .search-wrapper {
   position: relative;
   input {
