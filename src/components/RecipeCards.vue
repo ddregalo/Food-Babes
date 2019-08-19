@@ -69,17 +69,16 @@ export default Vue.extend({
   computed: {
     filteredRecipes: function(): any[] {
       return this.recipes.filter((recipe: any) => {
-        const recipeIngredients = [] as any[];
+        let recipeIngredients = [] as any[];
         recipe.ingredients.forEach(function(ingredient: any) {
           recipeIngredients.push(ingredient.item.toLowerCase());
         });
-        var cuisine = recipe.cuisine.toLowerCase();
-        var title = recipe.title.toLowerCase();
-        let searchTerms = this.search.word.split(" ");
-        
-        return recipeIngredients.join(" ").match(this.search.word.toLowerCase()) ||
-          cuisine.match(this.search.word.toLowerCase()) ||
-          title.match(this.search.word.toLowerCase());
+
+        let searcheableItems = recipeIngredients.join(" ") +
+          recipe.cuisine.toLowerCase() +
+          recipe.title.toLowerCase();
+
+        return searcheableItems.match(this.search.word.toLowerCase());
       });
     },
   },
