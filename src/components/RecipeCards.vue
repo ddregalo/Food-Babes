@@ -75,19 +75,11 @@ export default Vue.extend({
         });
         var cuisine = recipe.cuisine.toLowerCase();
         var title = recipe.title.toLowerCase();
+        let searchTerms = this.search.word.split(" ");
         
-        var filteredRecipes = recipeIngredients.join(" ").match(this.search.word.toLowerCase()) ||
+        return recipeIngredients.join(" ").match(this.search.word.toLowerCase()) ||
           cuisine.match(this.search.word.toLowerCase()) ||
           title.match(this.search.word.toLowerCase());
-        
-        if (recipeIngredients.length > 0) {
-            var searchWordElement = document.getElementById("search-filter");
-            if (searchWordElement) {
-              searchWordElement.classList.add("search-match");
-            }
-          }
-
-        return filteredRecipes;
       });
     },
   },
