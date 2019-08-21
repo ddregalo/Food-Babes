@@ -40,8 +40,8 @@
                         X
                         </span>
                         <div class="ingredient-form form horizontal">
-                        <b-form-input type="text" class="form-control mb-3 mr-5" style="width: 50%; display: inline;" placeholder="INGREDIENT" v-model="recipe.ingredients[key].item"></b-form-input>
-                        <b-form-input type="number" class="form-control mb-3" style="width: 30%; display: inline;" placeholder="QUANTITY" v-model="recipe.ingredients[key].quantity"></b-form-input>
+                        <b-form-input type="text" class="form-control mb-3 mr-5 ingredient" style="width: 50%; display: inline;" placeholder="INGREDIENT" v-model="recipe.ingredients[key].item"></b-form-input>
+                        <b-form-input type="number" class="form-control mb-3 ingredient-quantity" style="width: 30%; display: inline;" placeholder="QUANTITY" v-model="recipe.ingredients[key].quantity"></b-form-input>
                         </div>
                     </div>
                 </div>
