@@ -55,7 +55,7 @@
                 <input type="text" name="phone" placeholder="Phone" />
                 <textarea name="address" placeholder="Address"></textarea>
                 <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
-                <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                <input method="post" name="submit" class="submit action-button" value="Submit" @submit="onSubmit" />
             </fieldset>
         </form>
     </div>
