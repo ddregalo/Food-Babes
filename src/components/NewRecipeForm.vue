@@ -217,18 +217,12 @@ export default Vue.extend({
             .eq($("fieldset")
             .index(currentStep))
             .removeClass("active");
-        
-        //show the previous fieldset
+
         previousStep.show(); 
-        //hide the current fieldset with style
         currentStep.animate({opacity: 0}, {
             step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale previous_fs from 80% to 100%
-                scale = 0.8 + (1 - now) * 0.2;
-                //2. take current_fs to the right(50%) - from 0%
+                scale = 0.9 + (1 - now) * 0.1;
                 left = ((1-now) * 20)+"%";
-                //3. increase opacity of previous_fs to 1 as it moves in
                 opacity = 1 - now;
                 currentStep.css({'left': left});
                 previousStep.css({'transform': 'scale('+scale+')', 'opacity': opacity});
@@ -238,7 +232,6 @@ export default Vue.extend({
                 currentStep.hide();
                 animating = false;
             }, 
-            //this comes from the custom easing plugin
             easing: 'easeInOutBack'
         });
     },
@@ -266,7 +259,7 @@ html{background-image:url(http://hdwallpapercorner.com/gallery/5038-flight-at-su
 body {
 	font-family: montserrat, arial, verdana;margin:0;
 }
-/*form styles*/
+
 .dropdown {
     width: 260px;
     height: 31.08px;
@@ -274,31 +267,30 @@ body {
     position: relative;
     margin-bottom: 10px;
 }
+
 #msform {
 	width: 400px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
 }
+
 #msform fieldset {
 	background: rgba(0,0,0,0.7);
 	border: 0 none;
 	border-radius: 3px;
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px 30px;
-	
 	box-sizing: border-box;
 	width: 80%;
 	margin: 0 10%;
-	
-	/*stacking fieldsets above each other*/
 	position: absolute;
 }
-/*Hide all except first fieldset*/
+
 #msform fieldset:not(:first-of-type) {
 	display: none;
 }
-/*inputs*/
+
 #msform input, #msform textarea {
 	padding: 5px;
 	border: 1px solid #333;
@@ -310,7 +302,7 @@ body {
 	color: #2C3E50;
 	font-size: 13px;
 }
-/*buttons*/
+
 #msform .action-button {
 	width: 100px;
 	background: #27AE60;
@@ -322,29 +314,32 @@ body {
 	padding: 10px 5px;
 	margin: 10px 5px;
 }
+
 #msform .action-button:hover, #msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
-/*headings*/
+
 .fs-title {
 	font-size: 15px;
 	text-transform: uppercase;
 	color: #fff;
 	margin-bottom: 10px;
 }
+
 .fs-subtitle {
 	font-weight: normal;
 	font-size: 13px;
 	color: rgba(255,255,255,0.7);
 	margin-bottom: 20px;
 }
-/*progressbar*/
+
 #progressbar {
 	margin-bottom: 30px;
 	overflow: hidden;
 	/*CSS counters to number the steps*/
 	counter-reset: step;
 }
+
 #progressbar li {
 	list-style-type: none;
 	color: #333;
@@ -354,6 +349,7 @@ body {
 	float: left;
 	position: relative;
 }
+
 #progressbar li:before {
 	content: counter(step);
 	counter-increment: step;
@@ -366,7 +362,7 @@ body {
 	border-radius: 3px;
 	margin: 0 auto 5px auto;
 }
-/*progressbar connectors*/
+
 #progressbar li:after {
 	content: '';
 	width: 100%;
@@ -375,22 +371,17 @@ body {
 	position: absolute;
 	left: -50%;
 	top: 9px;
-	z-index: -1; /*put it behind the numbers*/
+	z-index: -1;
 }
+
 #progressbar li:first-child:after {
-	/*connector not needed before the first step*/
 	content: none; 
 }
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
+
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: #fff;
 }
-
-
-
-
 
 .left,.right{position:fixed;display:block;height:100vh;}
 .left{width:calc(60vw - 4%);max-width:calc(92% - 300px);padding:2%;overflow:auto}
