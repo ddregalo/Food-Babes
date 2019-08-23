@@ -69,8 +69,8 @@ import RecipeService from "@/services/RecipeService";
 
 Vue.use(Vuex);
 
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
+var left, opacity, scale;
+var animating;
 
 export default Vue.extend({
   name: "NewRecipeForm",
