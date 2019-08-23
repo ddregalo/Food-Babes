@@ -44,7 +44,7 @@
                 <input type="text" name="twitter" placeholder="Twitter" />
                 <input type="text" name="facebook" placeholder="Facebook" />
                 <input type="text" name="gplus" placeholder="Google Plus" />
-                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
                 <input type="button" name="next" class="next action-button" value="Next" v-on:click="nextFormStep" />
             </fieldset>
             <fieldset id="ingredient-method-details">
@@ -54,7 +54,7 @@
                 <input type="text" name="lname" placeholder="Last Name" />
                 <input type="text" name="phone" placeholder="Phone" />
                 <textarea name="address" placeholder="Address"></textarea>
-                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
                 <input type="submit" name="submit" class="submit action-button" value="Submit" />
             </fieldset>
         </form>
@@ -180,7 +180,7 @@ export default Vue.extend({
 	
         $("#progressbar li")
             .eq($("fieldset")
-            .index(next_fs))
+            .index(nextStep))
             .addClass("active");
 
         currentStep.animate({opacity: 0}, {
@@ -227,7 +227,7 @@ export default Vue.extend({
                 //1. scale previous_fs from 80% to 100%
                 scale = 0.8 + (1 - now) * 0.2;
                 //2. take current_fs to the right(50%) - from 0%
-                left = ((1-now) * 50)+"%";
+                left = ((1-now) * 20)+"%";
                 //3. increase opacity of previous_fs to 1 as it moves in
                 opacity = 1 - now;
                 currentStep.css({'left': left});
