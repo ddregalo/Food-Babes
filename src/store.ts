@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     cuisines: [
-      { text: "Select One", value: null },
+      "Choose the cuisine",
       "American",
       "Asian",
       "British",
@@ -21,7 +21,7 @@ export default new Vuex.Store({
       "Other"
     ],
     meals: [
-      { text: "Select One", value: null },
+      "Choose a meal",
       "Breakfast",
       "Lunch",
       "Snack",
