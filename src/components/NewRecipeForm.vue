@@ -1,62 +1,64 @@
 <template>
-    <b-form @submit="onSubmit">
-         <h4 class="form-subtitle">GENERAL DETAILS</h4>
-        <b-form-group inline id="recipe-form-group-1" label="URL" label-for="url">
-            <b-form-input id="url" type="text" v-model="recipe.url" placeholder="RECIPE URL"></b-form-input>
-        </b-form-group>
-        <b-form-group id="recipe-form-group-10" label="IMAGE URL" label-for="imageUrl">
-            <b-form-input id="imageUrl" class="form-input" type="text" v-model="recipe.imageUrl" placeholder="RECIPE IMGAGE URL">{{recipe.imageUrl}}</b-form-input>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-2" label="TITLE" label-for="title">
-            <b-form-input id="title" type="text" v-model="recipe.title" placeholder="RECIPE URL"></b-form-input>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-3" label="DESCRIPTION" label-for="title">
-            <b-form-textarea id="description" type="text" v-model="recipe.description" placeholder="A SHORT DESCRIPTION OF THE RECIPE..."></b-form-textarea>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-4" label="MEAL" label-for="meal">
-            <b-form-select id="meal" :options="meals" required v-model="recipe.meal"></b-form-select>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-5" label="CUISINE" label-for="cuisine">
-            <b-form-select id="cuisine" :options="cuisines" required v-model="recipe.cuisine"></b-form-select>
-        </b-form-group>
-        <div>
-            <h4 class="form-subtitle">TIMING</h4>
-        </div>
-        <b-form-group inline id="recipe-form-group-6" label="TOTAL TIME" label-for="totalTime">
-            <b-form-input id="totalTime" type="number" v-model="recipe.totalTime" placeholder="TOTAL TIME TO COOK AND PREP IN MINUTES"></b-form-input>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-7" label="PREP TIME" label-for="prepTime">
-            <b-form-input id="prepTime" type="number" v-model="recipe.prepTime" placeholder="TIME TO PREP IN MINUTES"></b-form-input>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-8" label="COOK TIME" label-for="cookTime">
-            <b-form-input id="cookTime" type="number" v-model="recipe.cookTime" placeholder="TIME TO COOK IN MINUTES"></b-form-input>
-        </b-form-group>
-        <h4 class="form-subtitle">INGREDIENTS</h4>
-        <b-form-group>
-            <div class="container-center">
-                <div class="card mb-3" v-for="(ingredient, key) in recipe.ingredients" :key="key">
-                    <div class="card-body">
-                        <span class="float-right" style="cursor: pointer" @click="removeIngredient(index)">
-                        X
-                        </span>
-                        <div class="ingredient-form form horizontal">
-                        <b-form-input type="text" class="form-control mb-3 mr-5 ingredient" style="width: 50%; display: inline;" placeholder="INGREDIENT" v-model="recipe.ingredients[key].item"></b-form-input>
-                        <b-form-input type="number" class="form-control mb-3 ingredient-quantity" style="width: 30%; display: inline;" placeholder="QUANTITY" v-model="recipe.ingredients[key].quantity"></b-form-input>
-                        </div>
-                    </div>
-                </div>
-                <div class="btn btn-primary mt-2 mb-5" @click="addIngredient">
-                ADD INGREDIENT
-                </div>
-            </div>
-        </b-form-group>
-        <b-form-group inline id="recipe-form-group-9" label="METHOD" label-for="method">
-            <b-form-input id="method" type="text" v-model="recipe.method" placeholder="HOW TO MAKE THIS..."></b-form-input>
-        </b-form-group>
-        <div>
-            <b-button type="submit" variant="primary">Submit</b-button>
-        </div>
-    </b-form>
+    <div id="form-wrapper">
+        <form id="msform">
+            <ul id="progressbar">
+                <li id="general-details-progress" class="active form-section">General Details</li>
+                <li id="timing-progress" class="form-section">Timing</li>
+                <li id="ingredients-method-progress" class="form-section">Ingredients + Method</li>
+            </ul>
+            <fieldset id="general-details">
+                <h2 class="fs-title">What's The Recipe?</h2>
+                <input type="text" 
+                        name="url" 
+                        id="url" 
+                        v-model="recipe.url" 
+                        placeholder="RECIPE URL"/>
+                <input type="text" 
+                        name="imageUrl" 
+                        id="imageUrl" 
+                        v-model="recipe.imageUrl" 
+                        placeholder="IMGAGE URL"/>
+                <input type="text" 
+                        name="title"
+                        id="title"
+                        v-model="recipe.title"
+                        placeholder="TITLE" />
+                <input type="textarea" 
+                    name="descrption"
+                    id="descrption"
+                    v-model="recipe.description"
+                    placeholder="In one sentence..." />
+                <select id="meal" class="dropdown">
+                    <option v-for="(meal, key) in meals" :key="key" 
+                        :value="meal">{{ meal }}</option>
+                </select>
+                <select id="cuisine" class="dropdown">
+                    <option v-for="(cuisine, key) in cuisines" :key="key" 
+                        :value="cuisine">{{ cuisine }}</option>
+                </select>
+                <input type="button" name="next" class="next action-button" value="Next" v-on:click="nextFormStep" />
+            </fieldset>
+            <fieldset id="timing-details">
+                <h2 class="fs-title">Timing</h2>
+                <h3 class="fs-subtitle">Cooking is fun when you do it with your babe!</h3>
+                <input type="text" name="twitter" placeholder="Twitter" />
+                <input type="text" name="facebook" placeholder="Facebook" />
+                <input type="text" name="gplus" placeholder="Google Plus" />
+                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" name="next" class="next action-button" value="Next" v-on:click="nextFormStep" />
+            </fieldset>
+            <fieldset id="ingredient-method-details">
+                <h2 class="fs-title">Ingredients + Method</h2>
+                <h3 class="fs-subtitle">Read the list twice, go to the shops once</h3>
+                <input type="text" name="fname" placeholder="First Name" />
+                <input type="text" name="lname" placeholder="Last Name" />
+                <input type="text" name="phone" placeholder="Phone" />
+                <textarea name="address" placeholder="Address"></textarea>
+                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="submit" name="submit" class="submit action-button" value="Submit" />
+            </fieldset>
+        </form>
+    </div>
 </template>
 
 <script type="ts">
@@ -66,6 +68,9 @@ import { store } from '@/store.ts';
 import RecipeService from "@/services/RecipeService";
 
 Vue.use(Vuex);
+
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
 
 export default Vue.extend({
   name: "NewRecipeForm",
@@ -86,6 +91,7 @@ export default Vue.extend({
       },
       meals: this.$store.state.meals,
       cuisines: this.$store.state.cuisines,
+      currentStep: $("#general-details")
     };
   },
   methods: {
@@ -114,9 +120,281 @@ export default Vue.extend({
         method: this.recipe.method
       });
       this.$router.push({ name: "recipes" });
+    },
+    getCurrentAndPreviousSteps: function () {
+        switch($(".active.form-section").last().text()) {
+            case "General Details":
+                return { 
+                    currentStep: $("#general-details"),
+                    previousStep: null
+                }
+                break;
+            case "Timing":
+                return { 
+                    currentStep: $("#timing-details"),
+                    previousStep: $("#general-details")
+                }
+                break;
+            case "Ingredients + Method":
+                return { 
+                    currentStep: $("#ingredient-method-details"),
+                    previousStep: $("#timing-details")
+                }
+            default:
+                return { 
+                    currentStep: $("#timing-details"),
+                    previousStep: $("#general-details")
+                }
+        }   
+    },
+    getCurrentAndNextSteps: function() {
+        switch($(".active.form-section").last().text()) {
+            case "General Details":
+                return { 
+                    currentStep: $("#general-details"),
+                    nextStep: $("#timing-details")
+                }
+                break;
+            case "Timing":
+                return { 
+                    currentStep: $("#timing-details"),
+                    nextStep: $("#ingredient-method-details")
+                }
+                break;
+            case "Ingredients + Method":
+                return { 
+                    currentStep: $("#ingredient-method-details"),
+                    nextStep: null
+                }
+            default:
+                return { 
+                    currentStep: $("#timing-details"),
+                    nextStep: $("#ingredient-method-details")
+                }
+        }   
+    },
+    nextFormStep: function() {
+        var currentAndnextStep = this.getCurrentAndNextSteps();
+        var currentStep = currentAndnextStep.currentStep;
+        var nextStep = currentAndnextStep.nextStep;
+	
+        $("#progressbar li")
+            .eq($("fieldset")
+            .index(next_fs))
+            .addClass("active");
+
+        currentStep.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale current_fs down to 80%
+                scale = 1 - (1 - now) * 0.1;
+                //2. bring next_fs from the right(50%)
+                left = (now * 50)+"%";
+                //3. increase opacity of next_fs to 1 as it moves in
+                opacity = 1 - now;
+                currentStep.css({'transform': 'scale('+scale+')'});
+                nextStep.css({'left': left, 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                currentStep.hide();
+                nextStep.show();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    },
+    previousFormStep: function() {
+        if(animating) return false;
+        animating = true;
+        
+        var currentAndPreviousSteps = this.getCurrentAndPreviousSteps();
+        var currentStep = currentAndPreviousSteps.currentStep;
+        var previousStep = currentAndPreviousSteps.previousStep;
+
+        $("#progressbar li")
+            .eq($("fieldset")
+            .index(currentStep))
+            .removeClass("active");
+        
+        //show the previous fieldset
+        previousStep.show(); 
+        //hide the current fieldset with style
+        currentStep.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale previous_fs from 80% to 100%
+                scale = 0.8 + (1 - now) * 0.2;
+                //2. take current_fs to the right(50%) - from 0%
+                left = ((1-now) * 50)+"%";
+                //3. increase opacity of previous_fs to 1 as it moves in
+                opacity = 1 - now;
+                currentStep.css({'left': left});
+                previousStep.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                currentStep.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    },
+    submit: function() {
+        /*	do something here */
+        return false;
     }
+  },
+  mounted() {
+    let jqueryScript = document.createElement('script');
+    jqueryScript.setAttribute('src', 'http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js');
+    jqueryScript.setAttribute('type', 'text/javascript');
+    document.head.appendChild(jqueryScript);
+
+    let jqueryEasingScript = document.createElement('script');
+    jqueryEasingScript.setAttribute('src', 'http://thecodeplayer.com/uploads/js/jquery.easing.min.js');
+    jqueryEasingScript.setAttribute('type', 'text/javascript');
+    document.head.appendChild(jqueryEasingScript);
   }
 });
 </script>
-<style type="text/scss">
+<style type="text/scss" scoped>
+* {margin: 0; padding: 0;}
+html{background-image:url(http://hdwallpapercorner.com/gallery/5038-flight-at-sunset-800x600.jpg);background-position:center;background-size:cover;height:100%;width:100%;}
+body {
+	font-family: montserrat, arial, verdana;margin:0;
+}
+/*form styles*/
+.dropdown {
+    width: 260px;
+    height: 31.08px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+#msform {
+	width: 400px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: rgba(0,0,0,0.7);
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	
+	/*stacking fieldsets above each other*/
+	position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+	padding: 5px;
+	border: 1px solid #333;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: #fff;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #fff;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(255,255,255,0.7);
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: #333;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: #ccc;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #ccc;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: #fff;
+}
+
+
+
+
+
+.left,.right{position:fixed;display:block;height:100vh;}
+.left{width:calc(60vw - 4%);max-width:calc(92% - 300px);padding:2%;overflow:auto}
+.right{background:rgba(0,0,0,0.7);right:0;padding:2%;width:calc(40vw - 4%);min-width:300px;}
+.graph{border:0px solid #fff;padding:2px 3px 2px 3px;border-radius:8px}
+.graph div{background: #FFB300;width:10%;font-size:10px;text-align:right;padding:3px 10px 3px 10px;border-radius:6px}
 </style>
