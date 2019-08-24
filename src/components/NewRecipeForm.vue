@@ -270,10 +270,6 @@ export default Vue.extend({
             }, 
             easing: 'easeInOutBack'
         });
-    },
-    submit: function() {
-        /*	do something here */
-        return false;
     }
   }
 });
