@@ -275,17 +275,6 @@ export default Vue.extend({
         /*	do something here */
         return false;
     }
-  },
-  mounted() {
-    let jqueryScript = document.createElement('script');
-    jqueryScript.setAttribute('src', 'http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js');
-    jqueryScript.setAttribute('type', 'text/javascript');
-    document.head.appendChild(jqueryScript);
-
-    let jqueryEasingScript = document.createElement('script');
-    jqueryEasingScript.setAttribute('src', 'http://thecodeplayer.com/uploads/js/jquery.easing.min.js');
-    jqueryEasingScript.setAttribute('type', 'text/javascript');
-    document.head.appendChild(jqueryEasingScript);
   }
 });
 </script>

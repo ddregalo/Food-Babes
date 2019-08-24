@@ -12,7 +12,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import fontawesome from "@fortawesome/fontawesome";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import './registerServiceWorker'
+import './registerServiceWorker';
 
 library.add(faCoffee);
 library.add(faClock);
