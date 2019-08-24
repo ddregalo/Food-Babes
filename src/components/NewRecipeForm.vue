@@ -41,19 +41,55 @@
             <fieldset id="timing-details">
                 <h2 class="fs-title">Timing</h2>
                 <h3 class="fs-subtitle">Cooking is fun when you do it with your babe!</h3>
-                <input type="text" name="twitter" placeholder="Twitter" />
-                <input type="text" name="facebook" placeholder="Facebook" />
-                <input type="text" name="gplus" placeholder="Google Plus" />
+                <input type="number" 
+                    name="totalTime"
+                    id="totalTime"
+                    v-model="recipe.totalTime" 
+                    placeholder="TOTAL TIME TO COOK AND PREP IN MINUTES" />
+                <input type="number" 
+                    name="prepTime"
+                    id="prepTime"
+                    v-model="recipe.prepTime" 
+                    placeholder="TIME TO PREP IN MINUTES" />
+                <input type="number" 
+                    name="cookTime"
+                    id="cookTime"
+                    v-model="recipe.cookTime" 
+                    placeholder="TIME TO COOK IN MINUTES" />
                 <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
                 <input type="button" name="next" class="next action-button" value="Next" v-on:click="nextFormStep" />
             </fieldset>
             <fieldset id="ingredient-method-details">
                 <h2 class="fs-title">Ingredients + Method</h2>
                 <h3 class="fs-subtitle">Read the list twice, go to the shops once</h3>
-                <input type="text" name="fname" placeholder="First Name" />
-                <input type="text" name="lname" placeholder="Last Name" />
-                <input type="text" name="phone" placeholder="Phone" />
-                <textarea name="address" placeholder="Address"></textarea>
+                <div class="container-center">
+                    <div class="card mb-3" v-for="(ingredient, key) in recipe.ingredients" :key="key">
+                        <div class="card-body">
+                            <span class="float-right" style="cursor: pointer" @click="removeIngredient(index)">
+                            X
+                            </span>
+                            <div class="ingredient-form form horizontal">
+                                <input type="text"
+                                    v-model="recipe.ingredients[key].item"
+                                    class="mb-3 mr-5 ingredient" 
+                                    style="width: 50%; display: inline;" 
+                                    placeholder="INGREDIENT" />
+                                <input type="number"
+                                    class="mb-3 ingredient-quantity"
+                                    style="width: 30%; display: inline;" 
+                                    placeholder="QUANTITY" 
+                                    v-model="recipe.ingredients[key].quantity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn btn-primary mt-2 mb-5" @click="addIngredient">
+                        ADD INGREDIENT
+                    </div>
+                </div>
+                <input type="text" 
+                        id="method"
+                        v-model="recipe.method"
+                        placeholder="HOW DO YOU MAKE IT?" />
                 <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
                 <input method="post" name="submit" class="submit action-button" value="Submit" @submit="onSubmit" />
             </fieldset>
