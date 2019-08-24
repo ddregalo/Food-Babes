@@ -31,9 +31,11 @@
       </b-card-group>
     </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
 import RecipeService from '../services/RecipeService';
+import 'jquery';
 
 export default Vue.extend({
   name: "RecipeCards",
@@ -84,9 +86,23 @@ export default Vue.extend({
   },
   async mounted() {
     await this.getAllRecipes();
+
+    let ingredientList = [] as string[];
+    this.ingredients.forEach((recipe) => {
+      recipe.forEach((ingredient: any) => {
+        ingredientList.push(ingredient.item.toLowerCase());
+      });
+    });
+
+    await (<any>$("#search-filter")).autocomplete({
+        source: ingredientList,
+        selectFirst: true,
+        minLength: 1
+      });
   }
 });
 </script>
+
 <style scoped lang="scss">
 p {
   color: black;
