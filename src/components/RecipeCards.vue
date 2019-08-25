@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="search-wrapper mb-5">
-        <input id="search-filter" type="text" data-role="tagsinput" v-model="search.word" placeholder="Search recipes..."/>
+        <input id="search-filter" type="text" v-model="search.word" placeholder="Search recipes..."/>
       </div>
       <b-card-group deck class="align-items-top d-flex justify-content-center">
           <div v-for="(recipe, index) in filteredRecipes" :key="recipe._id" class="card-group">
@@ -46,6 +46,7 @@ export default Vue.extend({
       },
       recipes: [] as any[],
       ingredients: [] as any[],
+      selectedSearchTerms: [] as string[]
     };
   },
   methods: {
@@ -78,8 +79,7 @@ export default Vue.extend({
 
         let searcheableItems = recipeIngredients.join(" ") +
           recipe.cuisine.toLowerCase() +
-          recipe.title.toLowerCase();
-
+          recipe.title.toLowerCase(); 
         return searcheableItems.match(this.search.word.toLowerCase());
       });
     },
@@ -95,108 +95,121 @@ export default Vue.extend({
     });
 
     await (<any>$("#search-filter")).autocomplete({
-        source: ingredientList,
-        selectFirst: true,
-        minLength: 1
-      });
+      source: ingredientList,
+      selectFirst: true,
+      minLength: 1
+    });
+    
+    $("#search-filter").on("autocompleteselect", (event, ui) => {
+      console.log("Selected search item: ", ui.item.value);
+    });
   }
 });
 </script>
 
 <style scoped lang="scss">
+/* autocomplete dropdown suggestions */
+/* component elements: cards, search filter */
 p {
-  color: black;
-  font-size: 1.5em;
-  margin: 0 auto;
-  padding-top: 0px;
+	color: black;
+	font-size: 1.5em;
+	margin: 0 auto;
+	padding-top: 0px;
 }
+
 .align-top {
-  vertical-align: top;
+	vertical-align: top;
 }
 
 .card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
+	width: 100%;
+	height: 15vw;
+	object-fit: cover;
 }
 
 .card-title {
-  font-size: 18px;
-  min-height: 40px;
+	font-size: 18px;
+	min-height: 40px;
 }
 
 .recipe-card {
-  margin: 15px;
-  text-transform: capitalize;
-  font-size: 0.7em;
+	margin: 15px;
+	text-transform: capitalize;
+	font-size: 0.7em;
 }
 
-.search-match {
-  color: red;
-}
-
-.search-wrapper {
-  position: relative;
-  input {
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
-    padding: 4px 12px;
-    color: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    transition: 0.15s all ease-in-out;
-    background: white;
-    width: 30%;
-    &:focus {
-      outline: none;
-      transform: scale(1.05);
-      & + label {
-        font-size: 10px;
-        transform: translateY(-24px) translateX(-12px);
-      }
-    }
-    &::-webkit-input-placeholder {
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.5);
-      font-weight: 100;
-    }
-  }
-}
 #cook-time {
-  color: rgb(95, 95, 95);
-  font-size: 1.2em;
-  padding-top: 0px;
+	color: rgb(95, 95, 95);
+	font-size: 1.2em;
+	padding-top: 0px;
 }
+
 #cuisine {
-  padding-top: 5px;
-  text-transform: uppercase;
-  color: rgb(170, 169, 169);
-  font-weight: 400;
-  letter-spacing: 4px;
-  font-size: 1.2em;
+	padding-top: 5px;
+	text-transform: uppercase;
+	color: rgb(170, 169, 169);
+	font-weight: 400;
+	letter-spacing: 4px;
+	font-size: 1.2em;
 }
+
 #meal {
-  padding-right: 10px;
-  text-transform: uppercase;
-  color: rgb(153, 153, 153);
-  font-weight: 500;
-  letter-spacing: 4px;
-  font-size: 1em;
+	padding-right: 10px;
+	text-transform: uppercase;
+	color: rgb(153, 153, 153);
+	font-weight: 500;
+	letter-spacing: 4px;
+	font-size: 1em;
 }
-#spacer{
-  padding-bottom:20px;
+
+#spacer {
+	padding-bottom: 20px;
 }
+
 .recipe-link {
-  color: white;
-  margin: 0 15px 0 15px;
+	color: white;
+	margin: 0 15px 0 15px;
 }
 
 .recipe-link-button {
-  color: white;
-  background-color: rgb(41, 59, 212);
+	color: white;
+	background-color: rgb(41, 59, 212);
 }
 
 .view-recipe-button {
-  font-size: 1.2em;
+	font-size: 1.2em;
+}
+
+/* search filter */
+.search-match {
+	color: red;
+}
+
+.search-wrapper {
+	position: relative;
+	input {
+		-webkit-border-radius: 50px;
+		-moz-border-radius: 50px;
+		border-radius: 50px;
+		padding: 4px 12px;
+		color: rgba(0, 0, 0, 0.7);
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		transition: 0.15s all ease-in-out;
+		background: white;
+		width: 30%;
+		&:focus {
+			outline: none;
+			transform: scale(1.05);
+			& + label {
+				font-size: 10px;
+				transform: translateY(-24px) translateX(-12px);
+			}
+		}
+		&::-webkit-input-placeholder {
+			font-size: 12px;
+			color: rgba(0, 0, 0, 0.5);
+			font-weight: 100;
+		}
+	}
 }
 </style>
