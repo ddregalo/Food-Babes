@@ -46,7 +46,6 @@ export default Vue.extend({
       },
       recipes: [] as any[],
       ingredients: [] as any[],
-      selectedSearchTerms: [] as string[]
     };
   },
   methods: {
@@ -76,17 +75,16 @@ export default Vue.extend({
         recipe.ingredients.forEach(function(ingredient: any) {
           recipeIngredients.push(ingredient.item.toLowerCase());
         });
-
         let searcheableItems = recipeIngredients.join(" ") +
           recipe.cuisine.toLowerCase() +
-          recipe.title.toLowerCase(); 
+          recipe.title.toLowerCase();
         return searcheableItems.match(this.search.word.toLowerCase());
       });
     },
   },
   async mounted() {
     await this.getAllRecipes();
-
+    
     let ingredientList = [] as string[];
     this.ingredients.forEach((recipe) => {
       recipe.forEach((ingredient: any) => {
