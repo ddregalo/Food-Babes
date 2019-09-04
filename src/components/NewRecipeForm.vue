@@ -56,8 +56,18 @@
                     id="cookTime"
                     v-model="recipe.cookTime" 
                     placeholder="TIME TO COOK IN MINUTES" />
-                <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
-                <input type="button" name="next" class="next action-button" value="Next" v-on:click="nextFormStep" />
+                <input 
+                    type="button" 
+                    name="previous" 
+                    class="previous action-button" 
+                    value="Previous" 
+                    v-on:click="previousFormStep" />
+                <input 
+                    type="button" 
+                    name="next" 
+                    class="next action-button" 
+                    value="Next" 
+                    v-on:click="nextFormStep" />
             </fieldset>
             <fieldset id="ingredient-method-details">
                 <h2 class="fs-title">Ingredients + Method</h2>
@@ -65,8 +75,11 @@
                 <div class="container-center">
                     <div class="card mb-3" v-for="(ingredient, key) in recipe.ingredients" :key="key">
                         <div class="card-body">
-                            <span class="float-right" style="cursor: pointer" @click="removeIngredient(index)">
-                            X
+                            <span 
+                                class="float-right" 
+                                style="cursor: pointer" 
+                                @click="removeIngredient(index)">
+                                X
                             </span>
                             <div class="ingredient-form form horizontal">
                                 <input type="text"
@@ -86,12 +99,22 @@
                         ADD INGREDIENT
                     </div>
                 </div>
-                <input type="text" 
-                        id="method"
-                        v-model="recipe.method"
-                        placeholder="HOW DO YOU MAKE IT?" />
-                <input type="button" name="previous" class="previous action-button" value="Previous" v-on:click="previousFormStep" />
-                <input method="post" name="submit" class="submit action-button" value="Submit" @submit="onSubmit" />
+                <input 
+                    type="text" 
+                    id="method"
+                    v-model="recipe.method"
+                    placeholder="HOW DO YOU MAKE IT?" />
+                <input 
+                    type="button" 
+                    name="previous" 
+                    class="previous action-button" 
+                    value="Previous" 
+                    v-on:click="previousFormStep" />
+                <input 
+                    name="submit" 
+                    class="submit action-button" 
+                    value="Submit" 
+                    @submit="onSubmit" />
             </fieldset>
         </form>
     </div>
@@ -213,33 +236,14 @@ export default Vue.extend({
         var currentAndnextStep = this.getCurrentAndNextSteps();
         var currentStep = currentAndnextStep.currentStep;
         var nextStep = currentAndnextStep.nextStep;
-	
+        console.log("next step: ", currentAndnextStep.nextStep);
         $("#progressbar li")
             .eq($("fieldset")
             .index(nextStep))
             .addClass("active");
 
-        currentStep.animate({opacity: 0}, {
-            step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale current_fs down to 80%
-                scale = 1 - (1 - now) * 0.1;
-                //2. bring next_fs from the right(50%)
-                left = (now * 50)+"%";
-                //3. increase opacity of next_fs to 1 as it moves in
-                opacity = 1 - now;
-                currentStep.css({'transform': 'scale('+scale+')'});
-                nextStep.css({'left': left, 'opacity': opacity});
-            }, 
-            duration: 800, 
-            complete: function(){
-                currentStep.hide();
-                nextStep.show();
-                animating = false;
-            }, 
-            //this comes from the custom easing plugin
-            easing: 'easeInOutBack'
-        });
+        currentStep.fadeOut(600);
+        nextStep.fadeIn(600);
     },
     previousFormStep: function() {
         if(animating) return false;
@@ -254,22 +258,8 @@ export default Vue.extend({
             .index(currentStep))
             .removeClass("active");
 
-        previousStep.show(); 
-        currentStep.animate({opacity: 0}, {
-            step: function(now, mx) {
-                scale = 0.9 + (1 - now) * 0.1;
-                left = ((1-now) * 20)+"%";
-                opacity = 1 - now;
-                currentStep.css({'left': left});
-                previousStep.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-            }, 
-            duration: 800, 
-            complete: function(){
-                currentStep.hide();
-                animating = false;
-            }, 
-            easing: 'easeInOutBack'
-        });
+        previousStep.fadeIn(); 
+        currentStep.fadeOut();
     }
   }
 });
